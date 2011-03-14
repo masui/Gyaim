@@ -3,7 +3,7 @@
 //  Gyaim
 //
 //  Created by Toshiyuki Masui on 11/03/14.
-//  Copyright __MyCompanyName__ 2011. All rights reserved.
+//  Copyright Pitecan Systems. 2011. All rights reserved.
 //
 
 #import <MacRuby/MacRuby.h>
