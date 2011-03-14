@@ -1,4 +1,4 @@
-# -*- coding: undecided -*-
+# -*- coding: utf-8 -*-
 #
 # rb_main.rb
 # Gyaim
@@ -9,6 +9,7 @@
 
 # Loading the Cocoa framework. If you need to load more frameworks, you can
 # do that here too.
+
 framework 'Cocoa'
 framework 'InputMethodKit'
 

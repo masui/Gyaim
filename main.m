@@ -1,5 +1,6 @@
 //
 //  main.m
+//
 //  Gyaim
 //
 //  Created by Toshiyuki Masui on 11/03/14.
@@ -7,7 +8,6 @@
 //
 
 #import <MacRuby/MacRuby.h>
-#import <InputMethodKit/InputMethodKit.h>
 
 int main(int argc, char *argv[])
 {
