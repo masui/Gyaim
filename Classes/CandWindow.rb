@@ -10,7 +10,7 @@ require "Log"
 class CandWindow < NSWindow
   def initWithContentRect(contentRect,styleMask:aStyle,backing:bufferingType,defer:d)
     Log.log "CandWin created"
-    # 何故かキーワード引数が使えない
+    # superにはキーワード引数が使えないらしく、以下のように書くことができない
     # super(contentRect,styleMask:NSBorderlessWindowMask,backing:NSBackingStoreBuffered,defer:false)
     if super(contentRect,NSBorderlessWindowMask,NSBackingStoreBuffered,false)
       setBackgroundColor(NSColor.clearColor)
@@ -23,7 +23,9 @@ class CandWindow < NSWindow
     end
   end
 
-  # ドラッグ用にmouseDownとかを定義予定
+  #
+  # ウィンドウ枠をドラッグ可能にするためにmouseDownとmouseDraggedを定義
+  #
   def mouseDragged(event)
     screenFrame = NSScreen.mainScreen.frame
     windowFrame = self.frame
