@@ -6,6 +6,7 @@
 # Copyright 2011 Pitecan Systems. All rights reserved.
 
 require 'Log'
+require 'WordSearch'
 
 class GyaimController < IMKInputController
   attr_accessor :candwin
@@ -16,6 +17,10 @@ class GyaimController < IMKInputController
     Log.log "initWithServer delegate=#{d}, client="#{c}"
     @client = c   # Lexierraではこれをnilにしてた。何故?
     @candwin = NSApp.delegate.candwin
+
+    ws = WordSearch.new
+    Log.log ws
+
     if super then # "super" と書くと同じ引数でスーパークラスを呼べる
       Log.log "Super end"
       self
@@ -53,6 +58,8 @@ class GyaimController < IMKInputController
   #
   def showWindow
     # MacRubyでポインタを使うための苦しいやり方
+    # 説明: http://d.hatena.ne.jp/Watson/20100823/1282543331
+    #
     lineRectP = Pointer.new('{CGRect={CGPoint=dd}{CGSize=dd}}')
     @client.attributesForCharacterIndex(0,lineHeightRectangle:lineRectP)
     lineRect = lineRectP[0]
@@ -60,7 +67,7 @@ class GyaimController < IMKInputController
     origin.x -= 15;
     origin.y -= 125;
     @candwin.setFrameOrigin(origin)
-    NSApp.delegate.candview.setNeedsDisplay(true) # ??? 消したり出したりするやり方をちゃんと考えなければ
+    # NSApp.delegate.candview.setNeedsDisplay(true) # ??? 消したり出したりするやり方をちゃんと考えなければ
     NSApp.unhide(self)
   end
 

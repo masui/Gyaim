@@ -56,6 +56,7 @@
 		CEA7E705132E11C800EF7235 /* GyaimController.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEA7E704132E11C800EF7235 /* GyaimController.rb */; };
 		CEB9E697132ECDB900F2ABDE /* CandWindow.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEB9E696132ECDB900F2ABDE /* CandWindow.rb */; };
 		CEBAEDD8132ED1AA00DAF9FC /* candwin.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAEDD7132ED1AA00DAF9FC /* candwin.png */; };
+		CEBB72EE132F883800854DF8 /* WordSearch.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEBB72ED132F883800854DF8 /* WordSearch.rb */; };
 		CEFDEE85132ECB54005C9484 /* Log.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEFDEE84132ECB54005C9484 /* Log.rb */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		CEA7E704132E11C800EF7235 /* GyaimController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = GyaimController.rb; path = Classes/GyaimController.rb; sourceTree = "<group>"; };
 		CEB9E696132ECDB900F2ABDE /* CandWindow.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = CandWindow.rb; path = Classes/CandWindow.rb; sourceTree = "<group>"; };
 		CEBAEDD7132ED1AA00DAF9FC /* candwin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = candwin.png; path = Resources/candwin.png; sourceTree = "<group>"; };
+		CEBB72ED132F883800854DF8 /* WordSearch.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = WordSearch.rb; path = WordSearch/WordSearch.rb; sourceTree = "<group>"; };
 		CEFDEE84132ECB54005C9484 /* Log.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Log.rb; path = Classes/Log.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +119,7 @@
 				CEB9E696132ECDB900F2ABDE /* CandWindow.rb */,
 				CE7465C5132ECF9000873646 /* CandView.rb */,
 				CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */,
+				CEBB72ED132F883800854DF8 /* WordSearch.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				CE2F8D0B132ED116006FAB89 /* icon.tiff in Resources */,
 				CEBAEDD8132ED1AA00DAF9FC /* candwin.png in Resources */,
 				CE4CC6F2132F3F7000AB1DBE /* AppDelegate.rb in Resources */,
+				CEBB72EE132F883800854DF8 /* WordSearch.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
