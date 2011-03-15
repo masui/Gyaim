@@ -8,6 +8,9 @@
 require 'Log'
 
 class GyaimController < IMKInputController
+  attr_accessor :candwin
+  attr_accessor :candview
+
   def initWithServer(server, delegate:d, client:c)
     Log.log "initWithServer delegate=#{d}, client="#{c}"
     # self = [super initWithServer:server delegate:delegate client:inputClient];

@@ -49,9 +49,13 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		CE105E96132E12470069F2CC /* gyaim.tiff in Resources */ = {isa = PBXBuildFile; fileRef = CE105E95132E12470069F2CC /* gyaim.tiff */; };
+		CE2F8D0B132ED116006FAB89 /* icon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = CE2F8D0A132ED116006FAB89 /* icon.tiff */; };
+		CE7465C6132ECF9000873646 /* CandView.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE7465C5132ECF9000873646 /* CandView.rb */; };
 		CEA7E6FD132E118400EF7235 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA7E6FC132E118400EF7235 /* InputMethodKit.framework */; };
 		CEA7E705132E11C800EF7235 /* GyaimController.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEA7E704132E11C800EF7235 /* GyaimController.rb */; };
+		CEB9E697132ECDB900F2ABDE /* CandWindow.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEB9E696132ECDB900F2ABDE /* CandWindow.rb */; };
+		CEBAEDD8132ED1AA00DAF9FC /* candwin.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAEDD7132ED1AA00DAF9FC /* candwin.png */; };
+		CEFDEE85132ECB54005C9484 /* Log.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEFDEE84132ECB54005C9484 /* Log.rb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,9 +84,13 @@
 		4DE3BE130D8651D900ECA448 /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = /Library/Frameworks/MacRuby.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Gyaim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gyaim.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE105E95132E12470069F2CC /* gyaim.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = gyaim.tiff; sourceTree = "<group>"; };
+		CE2F8D0A132ED116006FAB89 /* icon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = icon.tiff; path = Resources/icon.tiff; sourceTree = "<group>"; };
+		CE7465C5132ECF9000873646 /* CandView.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = CandView.rb; path = Classes/CandView.rb; sourceTree = "<group>"; };
 		CEA7E6FC132E118400EF7235 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
 		CEA7E704132E11C800EF7235 /* GyaimController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = GyaimController.rb; path = Classes/GyaimController.rb; sourceTree = "<group>"; };
+		CEB9E696132ECDB900F2ABDE /* CandWindow.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = CandWindow.rb; path = Classes/CandWindow.rb; sourceTree = "<group>"; };
+		CEBAEDD7132ED1AA00DAF9FC /* candwin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = candwin.png; path = Resources/candwin.png; sourceTree = "<group>"; };
+		CEFDEE84132ECB54005C9484 /* Log.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Log.rb; path = Classes/Log.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				CEA7E704132E11C800EF7235 /* GyaimController.rb */,
+				CEFDEE84132ECB54005C9484 /* Log.rb */,
+				CEB9E696132ECDB900F2ABDE /* CandWindow.rb */,
+				CE7465C5132ECF9000873646 /* CandView.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -169,7 +180,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CE105E95132E12470069F2CC /* gyaim.tiff */,
+				CEBAEDD7132ED1AA00DAF9FC /* candwin.png */,
+				CE2F8D0A132ED116006FAB89 /* icon.tiff */,
 				2BFA9DA510CDF852007972A1 /* MainMenu.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -244,7 +256,11 @@
 				4DE339F70D74FCDD00ADB6EE /* rb_main.rb in Resources */,
 				2BFA9DA710CDF852007972A1 /* MainMenu.xib in Resources */,
 				CEA7E705132E11C800EF7235 /* GyaimController.rb in Resources */,
-				CE105E96132E12470069F2CC /* gyaim.tiff in Resources */,
+				CEFDEE85132ECB54005C9484 /* Log.rb in Resources */,
+				CEB9E697132ECDB900F2ABDE /* CandWindow.rb in Resources */,
+				CE7465C6132ECF9000873646 /* CandView.rb in Resources */,
+				CE2F8D0B132ED116006FAB89 /* icon.tiff in Resources */,
+				CEBAEDD8132ED1AA00DAF9FC /* candwin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

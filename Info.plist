@@ -33,7 +33,7 @@
 	<key>InputMethodServerDelegateClass</key>
 	<string>GyaimController</string>
 	<key>tsInputMethodIconFileKey</key>
-	<string>gyaim.tiff</string>
+	<string>icon.tiff</string>
 	<key>tsInputMethodCharacterRepertoireKey</key>
 	<array>
 		<string>Latn</string>
