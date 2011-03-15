@@ -27,7 +27,12 @@ class GyaimController < IMKInputController
   #
   def activateServer(sender)
     Log.log "ActivateServer sender=#{sender}"
-    self.showWindow
+    showWindow
+  end
+
+  def deactivateServer(sender)
+    Log.log "DeActivateServer sender=#{sender}"
+    hideWindow
   end
 
   #
@@ -51,25 +56,16 @@ class GyaimController < IMKInputController
     lineRectP = Pointer.new('{CGRect={CGPoint=dd}{CGSize=dd}}')
     @client.attributesForCharacterIndex(0,lineHeightRectangle:lineRectP)
     lineRect = lineRectP[0]
-    Log.log lineRect.origin.x
-    Log.log lineRect.origin.y
-
-#  NSRect lineRect;
-#  [_client attributesForCharacterIndex:0 lineHeightRectangle:&lineRect];
-#  NSPoint origin = lineRect.origin;
-
-#  // And show the candidate window at that position.
-#  origin.x -= 15;
-#  origin.y -= 125;
-    
     origin = lineRect.origin
     origin.x -= 15;
     origin.y -= 125;
-    x = @candwin
-    Log.log "candwin=#{x}"
     @candwin.setFrameOrigin(origin)
-    NSApp.delegate.candview.setNeedsDisplay(true) # ???
+    NSApp.delegate.candview.setNeedsDisplay(true) # ??? 消したり出したりするやり方をちゃんと考えなければ
     NSApp.unhide(self)
+  end
+
+  def hideWindow
+    NSApp.hide(self)
   end
 
 end

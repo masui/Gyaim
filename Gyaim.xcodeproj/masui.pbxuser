@@ -45,18 +45,18 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 321874312;
-			PBXWorkspaceStateSaveDate = 321874312;
+			PBXPerProjectTemplateStateSaveDate = 321875616;
+			PBXWorkspaceStateSaveDate = 321875616;
 		};
 		perUserProjectItems = {
 			CE05D9E8132E3AFA00D1FC7F /* PlistBookmark */ = CE05D9E8132E3AFA00D1FC7F /* PlistBookmark */;
 			CE05D9E9132E3AFA00D1FC7F /* PBXTextBookmark */ = CE05D9E9132E3AFA00D1FC7F /* PBXTextBookmark */;
 			CE4CC702132F408400AB1DBE /* PBXBookmark */ = CE4CC702132F408400AB1DBE /* PBXBookmark */;
-			CE5D7604132F690000AB57CA /* PBXTextBookmark */ = CE5D7604132F690000AB57CA /* PBXTextBookmark */;
+			CE59D3BA132F6E3F00CBFBCB /* PBXTextBookmark */ = CE59D3BA132F6E3F00CBFBCB /* PBXTextBookmark */;
 			CE7465CB132ED06F00873646 /* PBXTextBookmark */ = CE7465CB132ED06F00873646 /* PBXTextBookmark */;
 			CEB9E69F132ECEE700F2ABDE /* PBXTextBookmark */ = CEB9E69F132ECEE700F2ABDE /* PBXTextBookmark */;
 			CEBAEDDB132ED24600DAF9FC /* PBXTextBookmark */ = CEBAEDDB132ED24600DAF9FC /* PBXTextBookmark */;
-			CEEF4F33132F69900054136C /* PBXTextBookmark */ = CEEF4F33132F69900054136C /* PBXTextBookmark */;
+			CEE2CCCF132F6EA9002C6FEA /* PBXTextBookmark */ = CEE2CCCF132F6EA9002C6FEA /* PBXTextBookmark */;
 			CEFDEE8A132ECBDB005C9484 /* PBXTextBookmark */ = CEFDEE8A132ECBDB005C9484 /* PBXTextBookmark */;
 			CEFDEE8B132ECBDB005C9484 /* PBXTextBookmark */ = CEFDEE8B132ECBDB005C9484 /* PBXTextBookmark */;
 			CEFDEE8C132ECBDB005C9484 /* PBXTextBookmark */ = CEFDEE8C132ECBDB005C9484 /* PBXTextBookmark */;
@@ -129,7 +129,7 @@
 		isa = PBXBookmark;
 		fRef = CEBAEDD7132ED1AA00DAF9FC /* candwin.png */;
 	};
-	CE5D7604132F690000AB57CA /* PBXTextBookmark */ = {
+	CE59D3BA132F6E3F00CBFBCB /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */;
 		name = "AppDelegate.rb: 13";
@@ -231,7 +231,7 @@
 		vrLen = 192;
 		vrLoc = 24;
 	};
-	CEEF4F33132F69900054136C /* PBXTextBookmark */ = {
+	CEE2CCCF132F6EA9002C6FEA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */;
 		name = "AppDelegate.rb: 13";
