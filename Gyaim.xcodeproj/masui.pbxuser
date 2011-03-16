@@ -67,17 +67,17 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 321937651;
-			PBXWorkspaceStateSaveDate = 321937651;
+			PBXPerProjectTemplateStateSaveDate = 321953451;
+			PBXWorkspaceStateSaveDate = 321953451;
 		};
 		perUserProjectItems = {
 			CE05D9E8132E3AFA00D1FC7F /* PlistBookmark */ = CE05D9E8132E3AFA00D1FC7F /* PlistBookmark */;
 			CE05D9E9132E3AFA00D1FC7F /* PBXTextBookmark */ = CE05D9E9132E3AFA00D1FC7F /* PBXTextBookmark */;
 			CE0A544713302A6F00F6433F /* PBXTextBookmark */ = CE0A544713302A6F00F6433F /* PBXTextBookmark */;
-			CE3A6750133060FC00C91D41 /* PBXTextBookmark */ = CE3A6750133060FC00C91D41 /* PBXTextBookmark */;
+			CE2642B613309DE600A7F9BA /* PBXTextBookmark */ = CE2642B613309DE600A7F9BA /* PBXTextBookmark */;
 			CE4CC702132F408400AB1DBE /* PBXBookmark */ = CE4CC702132F408400AB1DBE /* PBXBookmark */;
 			CE7465CB132ED06F00873646 /* PBXTextBookmark */ = CE7465CB132ED06F00873646 /* PBXTextBookmark */;
-			CEACC04E13305FF300040A37 /* PBXTextBookmark */ = CEACC04E13305FF300040A37 /* PBXTextBookmark */;
+			CEB6DD9113309EB400D9FE2D /* PBXTextBookmark */ = CEB6DD9113309EB400D9FE2D /* PBXTextBookmark */;
 			CEB9E69F132ECEE700F2ABDE /* PBXTextBookmark */ = CEB9E69F132ECEE700F2ABDE /* PBXTextBookmark */;
 			CEBAEDDB132ED24600DAF9FC /* PBXTextBookmark */ = CEBAEDDB132ED24600DAF9FC /* PBXTextBookmark */;
 			CEBB72F3132F894C00854DF8 /* PBXTextBookmark */ = CEBB72F3132F894C00854DF8 /* PBXTextBookmark */;
@@ -152,14 +152,14 @@
 		vrLen = 123;
 		vrLoc = 145;
 	};
-	CE3A6750133060FC00C91D41 /* PBXTextBookmark */ = {
+	CE2642B613309DE600A7F9BA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = CEBB72ED132F883800854DF8 /* WordSearch.rb */;
 		name = "WordSearch.rb: 1";
 		rLen = 0;
 		rLoc = 0;
 		rType = 0;
-		vrLen = 264;
+		vrLen = 0;
 		vrLoc = 0;
 	};
 	CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */ = {
@@ -245,14 +245,14 @@
 			sepNavVisRange = "{0, 0}";
 		};
 	};
-	CEACC04E13305FF300040A37 /* PBXTextBookmark */ = {
+	CEB6DD9113309EB400D9FE2D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = CEBB72ED132F883800854DF8 /* WordSearch.rb */;
 		name = "WordSearch.rb: 1";
 		rLen = 0;
 		rLoc = 0;
 		rType = 0;
-		vrLen = 265;
+		vrLen = 0;
 		vrLoc = 0;
 	};
 	CEB9E696132ECDB900F2ABDE /* CandWindow.rb */ = {
@@ -286,7 +286,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {569, 273}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 264}";
+			sepNavVisRange = "{0, 0}";
 		};
 	};
 	CEBB72F3132F894C00854DF8 /* PBXTextBookmark */ = {

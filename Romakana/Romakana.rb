@@ -436,18 +436,18 @@ class String
   @@rk = Romakana.new
 
   def roma2hiragana
-    @@rk.roma2hiragana(self)[0]
+    @@rk.roma2hiragana(self)[0].to_s
   end
 
   def roma2katakana
-    @@rk.roma2katakana(self)[0]
+    @@rk.roma2katakana(self)[0].to_s
   end
 
   def hiragana2roma
-    @@rk.hiragana2roma(self)[0]
+    @@rk.hiragana2roma(self)[0].to_s
   end
 
   def katakana2roma
-    @@rk.katakana2roma(self)[0]
+    @@rk.katakana2roma(self)[0].to_s
   end
 end

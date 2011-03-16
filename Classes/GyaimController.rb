@@ -143,8 +143,14 @@ class GyaimController < IMKInputController
   end
 
   def search
-    # @candidates = [@inputPat, @inputPat.roma2hiragana, "漢字", "変換", "候補"]
-    @candidates = [@inputPat, "abc", "def", "ghi"]
+    hiragana = @inputPat.roma2hiragana
+    Log.log "hiragana=#{hiragana}"
+    @candidates = []
+    @candidates << @inputPat
+    @candidates << hiragana if hiragana != ""
+    @candidates << "漢字"
+    @candidates << "変換"
+    @candidates << "候補"
     @nthCand = 0
   end
   
@@ -182,6 +188,7 @@ class GyaimController < IMKInputController
       textView.setString("")
       cands = @candidates[@nthCand+1 .. @nthCand+1+10]
       cands.each { |cand|
+        Log.log "cand = #{cand}"
         textView.insertText(cand)
         textView.insertText(" ")
       }
