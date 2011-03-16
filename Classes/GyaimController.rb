@@ -22,7 +22,9 @@ class GyaimController < IMKInputController
     @candwin = NSApp.delegate.candwin
     @textview = NSApp.delegate.textview
     # @romakana = Romakana.new
-    @ws = WordSearch.new
+
+    fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
+    @ws = WordSearch.new(fugopath)
     Log.log @ws
 
     reset

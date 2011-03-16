@@ -8,12 +8,11 @@
 class WordSearch
   attr :searchMode, true
 
-  def initialize
-    fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
-    # fugopath = "../Resources/fugodic.txt"
-
+  # fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
+  # fugopath = "../Resources/fugodic.txt"
+  def initialize(dictfile)
     @dict = []
-    File.open(fugopath){ |f|
+    File.open(dictfile){ |f|
       f.each { |line|
         next if line =~ /^#/
         line.chomp!
@@ -27,13 +26,17 @@ class WordSearch
 
   def search(q)
     pat = /^#{q}/
+    candfound = {}
     @candidates = []
     @dict.each { |entry|
       yomi = entry[0]
       word = entry[1]
       if yomi =~ pat then
-        @candidates << word
-        break if @candidates.length > 10
+        if !candfound[word] then
+          @candidates << word
+          candfound[word] = true
+          break if @candidates.length > 10
+        end
       end
     }
   end
@@ -42,7 +45,3 @@ class WordSearch
     @candidates
   end
 end
-
-# ws = WordSearch.new
-# ws.search("masui")
-# puts ws.candidates

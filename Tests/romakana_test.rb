@@ -3,8 +3,6 @@
 #   Romakana.rbのテスト
 #
 
-$KCODE='utf8'
-
 require 'test/unit'
 require 'Romakana/Romakana'
 
