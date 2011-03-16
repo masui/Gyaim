@@ -13,6 +13,15 @@
 #  rk.hiragana2roma('じしょ') ⇒ ['jisho', 'jisyo', 'zisho', 'zisyo']
 #
 
+# Ruby1.9にはString#eachが存在しないので
+class String
+  def each
+    self.each_line { |line|
+      yield line
+    }
+  end
+end
+
 class Romakana
   RKLIST = <<EOF
 #
@@ -253,7 +262,7 @@ $s = s
       if k then
         if kr[k] then
           rs = kr[k]
-          kr[k].each { |r|
+          rs.each { |r|
             kr[k] = r
             if r =~ /^([bcdfghjklmpqrstvwxyz])/ then
               krexpand(a + $1, b, false, result, kr)

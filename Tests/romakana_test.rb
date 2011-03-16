@@ -30,6 +30,12 @@ class RomakanaTest < Test::Unit::TestCase
     # ランダムに生成したひらがな/カタカナ文字列をローマ字変換した後
     # かな変換してもとにもどるかのテスト
     #
+    # "よぅつしみぉつけ"
+    # "おりぬぎぇせたぁ"
+    # "またっっいろむむ"
+    # ....
+    # みたいなのをどんどん生成する
+    #
     1000.times { |count|
       h = (0..7).collect { |i|
         @hira[rand(@hira.length)]

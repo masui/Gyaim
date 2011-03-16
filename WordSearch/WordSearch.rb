@@ -12,8 +12,9 @@ class WordSearch
   end
 
   def search
+  end
   
   def candidates
-    ["漢字", "変換", "ですよ"]
   end
 end
+
