@@ -20,7 +20,7 @@ class GyaimController < IMKInputController
     Log.log "initWithServer delegate=#{d}, client="#{c}"
     @client = c   # Lexierraではこれをnilにしてた。何故?
     @candwin = NSApp.delegate.candwin
-    # @textview = NSApp.delegate.textview
+    @textview = NSApp.delegate.textview
     # @romakana = Romakana.new
     @ws = WordSearch.new
     Log.log @ws
@@ -143,14 +143,20 @@ class GyaimController < IMKInputController
   end
 
   def search
+    @ws.search(@inputPat)
+    @candidates = @ws.candidates
     hiragana = @inputPat.roma2hiragana
-    Log.log "hiragana=#{hiragana}"
-    @candidates = []
-    @candidates << @inputPat
-    @candidates << hiragana if hiragana != ""
-    @candidates << "漢字"
-    @candidates << "変換"
-    @candidates << "候補"
+    @candidates.unshift(hiragana) if hiragana != ""
+    @candidates.unshift(@inputPat)
+
+#    Log.log "hiragana=#{hiragana}"
+#    @candidates = []
+#    @candidates << @inputPat
+#    @candidates << hiragana if hiragana != ""
+#    @candidates << "漢字"
+#    @candidates << "変換"
+#    @candidates << "候補"
+
     @nthCand = 0
   end
   
@@ -184,13 +190,13 @@ class GyaimController < IMKInputController
       attrstr = NSAttributedString.alloc.initWithString(word,attributes:attr)
       @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, 0))
 
-      textView = NSApp.delegate.textview
-      textView.setString("")
+      # textView = NSApp.delegate.textview
+
+      @textview.setString("")
       cands = @candidates[@nthCand+1 .. @nthCand+1+10]
       cands.each { |cand|
-        Log.log "cand = #{cand}"
-        textView.insertText(cand)
-        textView.insertText(" ")
+        @textview.insertText(cand)
+        @textview.insertText(" ")
       }
     end
   end
