@@ -20,10 +20,10 @@ class GyaimController < IMKInputController
     Log.log "initWithServer delegate=#{d}, client="#{c}"
     @client = c   # Lexierraではこれをnilにしてた。何故?
     @candwin = NSApp.delegate.candwin
-    @romakana = Romakana.new
-
-    ws = WordSearch.new
-    Log.log ws
+    # @textview = NSApp.delegate.textview
+    # @romakana = Romakana.new
+    @ws = WordSearch.new
+    Log.log @ws
 
     reset
 
@@ -48,7 +48,9 @@ class GyaimController < IMKInputController
 
   def reset
     @converting = false
-    @inputpat = ""
+    @inputPat = ""
+    @candidates = []
+    @nthCand = 0
   end
 
   #
@@ -90,50 +92,101 @@ class GyaimController < IMKInputController
     c = s.each_byte.to_a[0]
     Log.log sprintf("c = 0x%x",c)
 
+    #
+    # スペース、バックスペース、通常文字などの処理
+    #
     if c == 0x08 || c == 0x7f || c == 0x1b then
+      Log.log "BS"
+      Log.log "converting = #{@converting}"
+      Log.log "nthCand = #{@nthCand}"
+      Log.log "inputPat = #{@inputPat}"
       if @converting then
-        backspaceKey
+        if @nthCand > 0 then
+          prevCand
+        else
+          if @inputPat.length == 1 then
+            @inputPat = ""
+            reset
+            show
+            @client.setMarkedText(NSAttributedString.alloc.initWithString(""),selectionRange:NSMakeRange(0,0),replacementRange:NSMakeRange(NSNotFound,NSNotFound))
+          elsif @inputPat.length > 0 then
+            @inputPat.sub!(/.$/,'')
+            search
+            show
+          end
+        end
         handled = true
       end
     elsif c == 0x20 then
       if @converting then
-        spaceKey
+        nextCand
         handled = true
       end
     elsif c == 0x0a || c == 0x0d then
       if @converting then
-        returnKey
+        fix
         handled = true
       end
     elsif c >= 0x21 && c <= 0x7e && (modifierFlags & NSControlKeyMask) == 0 then
-      normalKey(eventString)
+      if @nthCand > 0 then
+        fix
+      end
+      @inputPat += eventString
+      @converting = true
+      search
+      show
       handled = true
     end
 
-#    @client.insertText("漢字", replacementRange:NSMakeRange(NSNotFound, 0))
-
     showWindow
-
     return handled
   end
 
-  def backspaceKey
-    Log.log "backspaceKey"
+  def search
+    # @candidates = [@inputPat, @inputPat.roma2hiragana, "漢字", "変換", "候補"]
+    @candidates = [@inputPat, "abc", "def", "ghi"]
+    @nthCand = 0
+  end
+  
+  def prevCand
+    if @nthCand > 0 then
+      @nthCand -= 1
+      show
+    end
   end
 
-  def spaceKey
-    Log.log "spaceKey"
+  def nextCand
+    if @nthCand < @candidates.length - 1 then
+      @nthCand += 1
+      show
+    end
   end
 
-  def returnKey
-    Log.log "returnKey"
+  def fix
+    if @candidates.length > @nthCand then
+      word = @candidates[@nthCand]
+      @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, 0))
+    end
+    reset
   end
 
-  def normalKey(s)
-    Log.log "normalKey #{s}"
-    @client.insertText(s, replacementRange:NSMakeRange(NSNotFound, 0))
-  end
+  def show
+    if @converting && @candidates.length > @nthCand then
+      word = @candidates[@nthCand]
+      kTSMHiliteRawText = 2
+      attr = self.markForStyle(kTSMHiliteRawText,atRange:NSMakeRange(0,word.length))
+      attrstr = NSAttributedString.alloc.initWithString(word,attributes:attr)
+      @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, 0))
 
+      textView = NSApp.delegate.textview
+      textView.setString("")
+      cands = @candidates[@nthCand+1 .. @nthCand+1+10]
+      cands.each { |cand|
+        textView.insertText(cand)
+        textView.insertText(" ")
+      }
+    end
+  end
 
   #
   # キャレットの位置に候補ウィンドウを出す
@@ -157,5 +210,4 @@ class GyaimController < IMKInputController
   def hideWindow
     NSApp.hide(self)
   end
-
 end
