@@ -387,7 +387,7 @@ end
         end
       end
     end
-    okay ? [kana] : [];
+    okay ? [kana] : [kana];
   end
 
   def roma2katakana(roma)
@@ -428,7 +428,7 @@ end
         end
       end
     end
-    okay ? [kana] : [];
+    okay ? [kana] : [kana];
   end
 end
 

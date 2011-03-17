@@ -106,19 +106,21 @@ class GyaimController < IMKInputController
           @nthCand -= 1
           showCands
         else
-          if @inputPat.length == 1 then
-            @inputPat = ""
-            resetState
-            showCands
-            @client.setMarkedText(NSAttributedString.alloc.initWithString(""),
-                                  selectionRange:NSMakeRange(0,0),
-                                  replacementRange:NSMakeRange(NSNotFound,NSNotFound))
-          elsif @inputPat.length > 0 then
+#          if @inputPat.length == 1 then
+#            @inputPat = ""
+#            resetState
+#            showCands
+#            @client.setMarkedText(NSAttributedString.alloc.initWithString(""),
+#                                  selectionRange:NSMakeRange(0,0),
+#                                  replacementRange:NSMakeRange(NSNotFound,NSNotFound))
+#          elsif @inputPat.length > 0 then
             @inputPat.sub!(/.$/,'')
             searchAndShowCands
-          end
+#          end
         end
         handled = true
+      else
+        puts "not converting"
       end
     elsif c == 0x20 then
       if converting then
