@@ -110,7 +110,9 @@ class GyaimController < IMKInputController
             @inputPat = ""
             resetState
             showCands
-            @client.setMarkedText(NSAttributedString.alloc.initWithString(""),selectionRange:NSMakeRange(0,0),replacementRange:NSMakeRange(NSNotFound,NSNotFound))
+            @client.setMarkedText(NSAttributedString.alloc.initWithString(""),
+                                  selectionRange:NSMakeRange(0,0),
+                                  replacementRange:NSMakeRange(NSNotFound,NSNotFound))
           elsif @inputPat.length > 0 then
             @inputPat.sub!(/.$/,'')
             searchAndShowCands
@@ -132,9 +134,7 @@ class GyaimController < IMKInputController
         handled = true
       end
     elsif c >= 0x21 && c <= 0x7e && (modifierFlags & NSControlKeyMask) == 0 then
-      if @nthCand > 0 then
-        fix
-      end
+      fix if @nthCand > 0
       @inputPat += eventString
       searchAndShowCands
       handled = true
@@ -162,7 +162,9 @@ class GyaimController < IMKInputController
   def fix
     if @candidates.length > @nthCand then
       word = @candidates[@nthCand]
-      @client.insertText(word)
+      # 何故かinsertTextだとhandleEventが呼ばれてしまうようで
+      # @client.insertText(word)
+      @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, 0))
     end
     resetState
   end
@@ -173,10 +175,12 @@ class GyaimController < IMKInputController
       # 選択中の単語をキャレット位置にアンダーライン表示
       #
       word = @candidates[@nthCand]
-      kTSMHiliteRawText = 2
-      attr = self.markForStyle(kTSMHiliteRawText,atRange:NSMakeRange(0,word.length))
-      attrstr = NSAttributedString.alloc.initWithString(word,attributes:attr)
-      @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, 0))
+      if word then
+        kTSMHiliteRawText = 2
+        attr = self.markForStyle(kTSMHiliteRawText,atRange:NSMakeRange(0,word.length))
+        attrstr = NSAttributedString.alloc.initWithString(word,attributes:attr)
+        @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, 0))
+      end
       #
       # 候補単語リストを表示
       #
