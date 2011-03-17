@@ -124,10 +124,6 @@ class GyaimController < IMKInputController
       if converting then
         if @exactMode then
           fix
-#          if @nthCand == 0 then # ひらがな確定
-#          else
-#            fix
-#          end
         else
           if @nthCand == 0 then
             @exactMode = true
@@ -158,6 +154,9 @@ class GyaimController < IMKInputController
     if @exactMode then
       @ws.search("^#{@inputPat}$")
       @candidates = @ws.candidates
+      katakana = @inputPat.roma2katakana
+      @candidates.delete(katakana)
+      @candidates.unshift(katakana) if katakana != ""
       hiragana = @inputPat.roma2hiragana
       @candidates.delete(hiragana)
       @candidates.unshift(hiragana) if hiragana != ""
@@ -179,7 +178,7 @@ class GyaimController < IMKInputController
       word = @candidates[@nthCand]
       # 何故かinsertTextだとhandleEventが呼ばれてしまうようで
       # @client.insertText(word)
-      @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, 0))
+      @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
     end
     @exactMode = false
     resetState
@@ -195,7 +194,7 @@ class GyaimController < IMKInputController
         kTSMHiliteRawText = 2
         attr = self.markForStyle(kTSMHiliteRawText,atRange:NSMakeRange(0,word.length))
         attrstr = NSAttributedString.alloc.initWithString(word,attributes:attr)
-        @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, 0))
+        @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, NSNotFound))
       end
       #
       # 候補単語リストを表示
