@@ -19,15 +19,16 @@ class GyaimController < IMKInputController
   def initWithServer(server, delegate:d, client:c)
     Log.log "initWithServer delegate=#{d}, client="#{c}"
     @client = c   # Lexierraではこれをnilにしてた。何故?
+
+    # これが何故必要なのか不明
     @candwin = NSApp.delegate.candwin
     @textview = NSApp.delegate.textview
-    # @romakana = Romakana.new
 
+    # 富豪辞書サーチ
     fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
     @ws = WordSearch.new(fugopath)
-    Log.log @ws
 
-    reset
+    resetState
 
     if super then # "super" と書くと同じ引数でスーパークラスを呼べる
       Log.log "Super end"
@@ -48,7 +49,7 @@ class GyaimController < IMKInputController
     hideWindow
   end
 
-  def reset
+  def resetState
     @converting = false
     @inputPat = ""
     @candidates = []
@@ -98,23 +99,19 @@ class GyaimController < IMKInputController
     # スペース、バックスペース、通常文字などの処理
     #
     if c == 0x08 || c == 0x7f || c == 0x1b then
-      Log.log "BS"
-      Log.log "converting = #{@converting}"
-      Log.log "nthCand = #{@nthCand}"
-      Log.log "inputPat = #{@inputPat}"
       if @converting then
         if @nthCand > 0 then
           prevCand
         else
           if @inputPat.length == 1 then
             @inputPat = ""
-            reset
-            show
+            resetState
+            showCands
             @client.setMarkedText(NSAttributedString.alloc.initWithString(""),selectionRange:NSMakeRange(0,0),replacementRange:NSMakeRange(NSNotFound,NSNotFound))
           elsif @inputPat.length > 0 then
             @inputPat.sub!(/.$/,'')
             search
-            show
+            showCands
           end
         end
         handled = true
@@ -136,7 +133,7 @@ class GyaimController < IMKInputController
       @inputPat += eventString
       @converting = true
       search
-      show
+      showCands
       handled = true
     end
 
@@ -144,62 +141,53 @@ class GyaimController < IMKInputController
     return handled
   end
 
+  # 単語検索して候補の配列作成
   def search
     @ws.search(@inputPat)
     @candidates = @ws.candidates
     hiragana = @inputPat.roma2hiragana
-    @candidates.unshift(hiragana) if hiragana != ""
+    @candidates.unshift(hiragana) if hiragana != "" && @candidates.index(hiragana).nil?
     @candidates.unshift(@inputPat)
-
-#    Log.log "hiragana=#{hiragana}"
-#    @candidates = []
-#    @candidates << @inputPat
-#    @candidates << hiragana if hiragana != ""
-#    @candidates << "漢字"
-#    @candidates << "変換"
-#    @candidates << "候補"
-
     @nthCand = 0
   end
   
   def prevCand
     if @nthCand > 0 then
       @nthCand -= 1
-      show
+      showCands
     end
   end
 
   def nextCand
     if @nthCand < @candidates.length - 1 then
       @nthCand += 1
-      show
+      showCands
     end
   end
 
   def fix
     if @candidates.length > @nthCand then
       word = @candidates[@nthCand]
-      @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, 0))
+      # @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, 0))
+      @client.insertText(word)
     end
-    reset
+    resetState
   end
 
-  def show
+  def showCands
     if @converting && @candidates.length > @nthCand then
+      #
+      # 選択中の単語をキャレット位置にアンダーライン表示
+      #
       word = @candidates[@nthCand]
       kTSMHiliteRawText = 2
       attr = self.markForStyle(kTSMHiliteRawText,atRange:NSMakeRange(0,word.length))
       attrstr = NSAttributedString.alloc.initWithString(word,attributes:attr)
       @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, 0))
-
-      # textView = NSApp.delegate.textview
-
-      @textview.setString("")
-      cands = @candidates[@nthCand+1 .. @nthCand+1+10]
-      cands.each { |cand|
-        @textview.insertText(cand)
-        @textview.insertText(" ")
-      }
+      #
+      # 候補単語リストを表示
+      #
+      @textview.setString(@candidates[@nthCand+1 .. @nthCand+1+10].join(' '))
     end
   end
 
@@ -207,7 +195,6 @@ class GyaimController < IMKInputController
   # キャレットの位置に候補ウィンドウを出す
   #
   def showWindow
-    Log.log "showWindow"
     # MacRubyでポインタを使うための苦しいやり方
     # 説明: http://d.hatena.ne.jp/Watson/20100823/1282543331
     #
@@ -218,7 +205,6 @@ class GyaimController < IMKInputController
     origin.x -= 15;
     origin.y -= 125;
     @candwin.setFrameOrigin(origin)
-    # NSApp.delegate.candview.setNeedsDisplay(true) # ??? 消したり出したりするやり方をちゃんと考えなければ
     NSApp.unhide(self)
   end
 
