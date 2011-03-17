@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+#
 # GyaimController.rb
 # Gyaim
 #
 # Created by Toshiyuki Masui on 11/03/14.
 # Copyright 2011 Pitecan Systems. All rights reserved.
+#
 
 framework 'InputMethodKit'
 
@@ -30,8 +32,7 @@ class GyaimController < IMKInputController
 
     resetState
 
-    if super then # "super" と書くと同じ引数でスーパークラスを呼べる
-      Log.log "Super end"
+    if super then
       self
     end
   end
@@ -40,20 +41,21 @@ class GyaimController < IMKInputController
   # 入力システムがアクティブになると呼ばれる
   #
   def activateServer(sender)
-    Log.log "ActivateServer sender=#{sender}"
     showWindow
   end
 
   def deactivateServer(sender)
-    Log.log "DeActivateServer sender=#{sender}"
     hideWindow
   end
 
   def resetState
-    @converting = false
     @inputPat = ""
     @candidates = []
     @nthCand = 0
+  end
+
+  def converting
+    @inputPat.length > 0
   end
 
   #
@@ -99,9 +101,10 @@ class GyaimController < IMKInputController
     # スペース、バックスペース、通常文字などの処理
     #
     if c == 0x08 || c == 0x7f || c == 0x1b then
-      if @converting then
+      if converting then
         if @nthCand > 0 then
-          prevCand
+          @nthCand -= 1
+          showCands
         else
           if @inputPat.length == 1 then
             @inputPat = ""
@@ -110,19 +113,21 @@ class GyaimController < IMKInputController
             @client.setMarkedText(NSAttributedString.alloc.initWithString(""),selectionRange:NSMakeRange(0,0),replacementRange:NSMakeRange(NSNotFound,NSNotFound))
           elsif @inputPat.length > 0 then
             @inputPat.sub!(/.$/,'')
-            search
-            showCands
+            searchAndShowCands
           end
         end
         handled = true
       end
     elsif c == 0x20 then
-      if @converting then
-        nextCand
+      if converting then
+        if @nthCand < @candidates.length - 1 then
+          @nthCand += 1
+          showCands
+        end
         handled = true
       end
     elsif c == 0x0a || c == 0x0d then
-      if @converting then
+      if converting then
         fix
         handled = true
       end
@@ -131,9 +136,7 @@ class GyaimController < IMKInputController
         fix
       end
       @inputPat += eventString
-      @converting = true
-      search
-      showCands
+      searchAndShowCands
       handled = true
     end
 
@@ -142,40 +145,30 @@ class GyaimController < IMKInputController
   end
 
   # 単語検索して候補の配列作成
-  def search
+  def searchAndShowCands
+    #
+    # WordSearch#search で検索して WordSearch#candidates で受け取る
+    #
     @ws.search(@inputPat)
     @candidates = @ws.candidates
     hiragana = @inputPat.roma2hiragana
-    @candidates.unshift(hiragana) if hiragana != "" && @candidates.index(hiragana).nil?
+    @candidates.delete(hiragana)
+    @candidates.unshift(hiragana) if hiragana != ""
     @candidates.unshift(@inputPat)
     @nthCand = 0
+    showCands
   end
   
-  def prevCand
-    if @nthCand > 0 then
-      @nthCand -= 1
-      showCands
-    end
-  end
-
-  def nextCand
-    if @nthCand < @candidates.length - 1 then
-      @nthCand += 1
-      showCands
-    end
-  end
-
   def fix
     if @candidates.length > @nthCand then
       word = @candidates[@nthCand]
-      # @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, 0))
       @client.insertText(word)
     end
     resetState
   end
 
   def showCands
-    if @converting && @candidates.length > @nthCand then
+#    if converting && @candidates.length > @nthCand then
       #
       # 選択中の単語をキャレット位置にアンダーライン表示
       #
@@ -188,7 +181,7 @@ class GyaimController < IMKInputController
       # 候補単語リストを表示
       #
       @textview.setString(@candidates[@nthCand+1 .. @nthCand+1+10].join(' '))
-    end
+#    end
   end
 
   #
