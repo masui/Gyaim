@@ -2,7 +2,7 @@
 # Romakana.rb
 # Gyaim
 #
-# Created by Toshiyuki Masui on 11/03/15.
+# Created by Toshiyuki Masui on 2011/3/15.
 # Copyright 2011 Pitecan Systems. All rights reserved.
 #
 #  複数のローマ字表現を考慮したローマ字かな変換ライブラリ。

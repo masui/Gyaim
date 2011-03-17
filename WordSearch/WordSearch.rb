@@ -6,8 +6,6 @@
 # Copyright 2011 Pitecan Systems. All rights reserved.
 
 class WordSearch
-  attr :searchMode, true
-
   def charcode(s)
     sprintf("%02x",s.each_byte.to_a[0])
   end

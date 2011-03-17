@@ -2,14 +2,11 @@
 # CandWindow.rb
 # Gyaim
 #
-# Created by Toshiyuki Masui on 11/03/15.
+# Created by Toshiyuki Masui on 2011/3/15.
 # Copyright 2011 Pitecan Systems. All rights reserved.
-
-require "Log"
 
 class CandWindow < NSWindow
   def initWithContentRect(contentRect,styleMask:aStyle,backing:bufferingType,defer:d)
-    Log.log "CandWin created"
     # superにはキーワード引数が使えないらしく、以下のように書くことができない
     # super(contentRect,styleMask:NSBorderlessWindowMask,backing:NSBackingStoreBuffered,defer:false)
     if super(contentRect,NSBorderlessWindowMask,NSBackingStoreBuffered,false)
