@@ -2,7 +2,7 @@
 # WordSearch.rb
 # Gyaim
 #
-# Created by Toshiyuki Masui on 11/03/15.
+# Created by Toshiyuki Masui on 2011/3/15.
 # Copyright 2011 Pitecan Systems. All rights reserved.
 
 class WordSearch
@@ -61,7 +61,7 @@ class WordSearch
     pat = /#{q}/
     candfound = {}
     @candidates = []
-    s = q.sub(/^./,'')
+    s = q.sub(/^\^/,'') # 先頭の '^' を消す
     return if s == ''
     code = charcode(s)
     if !@dict[code] then

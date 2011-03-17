@@ -452,10 +452,4 @@ class String
   end
 end
 
-# puts "っっしどしゃゅょ"
-# puts "っっしどしゃゅょ".hiragana2roma
-# puts "っっしどしゃゅょ".hiragana2roma.roma2hiragana
-# puts "ぉざほっそどれ"
-# puts "ぉざほっそどれ".hiragana2roma
-# puts "ぉざほっそどれ".hiragana2roma.roma2hiragana
 

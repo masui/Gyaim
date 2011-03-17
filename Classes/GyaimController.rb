@@ -3,7 +3,7 @@
 # GyaimController.rb
 # Gyaim
 #
-# Created by Toshiyuki Masui on 11/03/14.
+# Created by Toshiyuki Masui on 2011/3/14.
 # Copyright 2011 Pitecan Systems. All rights reserved.
 #
 
@@ -19,8 +19,8 @@ class GyaimController < IMKInputController
   attr_accessor :textview
 
   def initWithServer(server, delegate:d, client:c)
-    Log.log "initWithServer delegate=#{d}, client="#{c}"
-    @client = c   # Lexierraではこれをnilにしてた。何故?
+    # Log.log "initWithServer delegate=#{d}, client="#{c}"
+    # @client = c   # Lexierraではこれをnilにしてた。何故?
 
     # これが何故必要なのか不明
     @candwin = NSApp.delegate.candwin
@@ -114,7 +114,7 @@ class GyaimController < IMKInputController
       end
     elsif c == 0x20 then
       if converting then
-        if @nthCand < @candidates.length - 1 then
+        if @nthCand < @candidates.length-1 then
           @nthCand += 1
           showCands
         end
