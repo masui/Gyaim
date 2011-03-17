@@ -52,6 +52,7 @@ class GyaimController < IMKInputController
     @inputPat = ""
     @candidates = []
     @nthCand = 0
+    @exactMode = false
   end
 
   def converting
@@ -106,21 +107,10 @@ class GyaimController < IMKInputController
           @nthCand -= 1
           showCands
         else
-#          if @inputPat.length == 1 then
-#            @inputPat = ""
-#            resetState
-#            showCands
-#            @client.setMarkedText(NSAttributedString.alloc.initWithString(""),
-#                                  selectionRange:NSMakeRange(0,0),
-#                                  replacementRange:NSMakeRange(NSNotFound,NSNotFound))
-#          elsif @inputPat.length > 0 then
-            @inputPat.sub!(/.$/,'')
-            searchAndShowCands
-#          end
+          @inputPat.sub!(/.$/,'')
+          searchAndShowCands
         end
         handled = true
-      else
-        puts "not converting"
       end
     elsif c == 0x20 then
       if converting then
@@ -132,13 +122,27 @@ class GyaimController < IMKInputController
       end
     elsif c == 0x0a || c == 0x0d then
       if converting then
-        fix
+        if @exactMode then
+          fix
+#          if @nthCand == 0 then # ひらがな確定
+#          else
+#            fix
+#          end
+        else
+          if @nthCand == 0 then
+            @exactMode = true
+            searchAndShowCands
+          else
+            fix
+          end
+        end
         handled = true
       end
     elsif c >= 0x21 && c <= 0x7e && (modifierFlags & NSControlKeyMask) == 0 then
-      fix if @nthCand > 0
+      fix if @nthCand > 0 || @exactMode
       @inputPat += eventString
       searchAndShowCands
+      @exactMode = false
       handled = true
     end
 
@@ -151,12 +155,21 @@ class GyaimController < IMKInputController
     #
     # WordSearch#search で検索して WordSearch#candidates で受け取る
     #
-    @ws.search(@inputPat)
-    @candidates = @ws.candidates
-    hiragana = @inputPat.roma2hiragana
-    @candidates.delete(hiragana)
-    @candidates.unshift(hiragana) if hiragana != ""
-    @candidates.unshift(@inputPat)
+    if @exactMode then
+      @ws.search("^#{@inputPat}$")
+      @candidates = @ws.candidates
+      hiragana = @inputPat.roma2hiragana
+      @candidates.delete(hiragana)
+      @candidates.unshift(hiragana) if hiragana != ""
+    else
+      @ws.search("^#{@inputPat}")
+      @candidates = @ws.candidates
+      @candidates.unshift(@inputPat)
+      if @candidates.length < 8 then
+        hiragana = @inputPat.roma2hiragana
+        @candidates.push(hiragana)
+      end
+    end
     @nthCand = 0
     showCands
   end
@@ -168,6 +181,7 @@ class GyaimController < IMKInputController
       # @client.insertText(word)
       @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, 0))
     end
+    @exactMode = false
     resetState
   end
 

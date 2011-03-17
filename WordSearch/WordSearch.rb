@@ -31,7 +31,6 @@ class WordSearch
   # fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
   # fugopath = "../Resources/fugodic.txt"
   def initialize(fugodic)
-    Log.log "Initialize(#{fugodic})"
     @candidates = []
     @dict = {}
     d = dictfile(charcode("kanji"))
@@ -59,12 +58,12 @@ class WordSearch
   end
 
   def search(q,limit=10)
-    Log.log "search(#{q})"
-    pat = /^#{q}/
+    pat = /#{q}/
     candfound = {}
     @candidates = []
-    return if q == ''
-    code = charcode(q)
+    s = q.sub(/^./,'')
+    return if s == ''
+    code = charcode(s)
     if !@dict[code] then
       File.open(dictfile(code)){ |f|
         @dict[code] = Marshal.load(f)
@@ -90,9 +89,9 @@ end
 
 if __FILE__ == $0 then
   ws = WordSearch.new("/Users/masui/Gyaim/Resources/fugodic.txt")
-  ws.search("masui")
+  ws.search("^masui")
   puts ws.candidates
-  ws.search("kanj")
+  ws.search("^kanj")
   puts ws.candidates
 end
 

@@ -387,7 +387,7 @@ end
         end
       end
     end
-    okay ? [kana] : [kana];
+    okay ? [kana] : [kana]
   end
 
   def roma2katakana(roma)
@@ -428,7 +428,7 @@ end
         end
       end
     end
-    okay ? [kana] : [kana];
+    okay ? [kana] : [kana]
   end
 end
 
@@ -451,3 +451,11 @@ class String
     @@rk.katakana2roma(self)[0].to_s
   end
 end
+
+# puts "っっしどしゃゅょ"
+# puts "っっしどしゃゅょ".hiragana2roma
+# puts "っっしどしゃゅょ".hiragana2roma.roma2hiragana
+# puts "ぉざほっそどれ"
+# puts "ぉざほっそどれ".hiragana2roma
+# puts "ぉざほっそどれ".hiragana2roma.roma2hiragana
+
