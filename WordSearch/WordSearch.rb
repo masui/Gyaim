@@ -26,33 +26,38 @@ class WordSearch
     @dict[charcode(s)] = val
   end
 
+  def createDictCache
+    File.open(@dictfile){ |f|
+      f.each { |line|
+        next if line =~ /^#/
+        line.chomp!
+        (yomi,word) = line.split(/\s+/)
+        if yomi && word then
+          if dict(yomi).nil? then
+            setdict(yomi,[])
+          end
+          dict(yomi) << [yomi,word]
+        end
+      }
+    }
+    @dict.each { |code,dic|
+      File.open(dictfile(code),"w"){ |f|
+        Marshal.dump(dic,f)
+      }
+    }
+  end
+
   # fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
   # fugopath = "../Resources/fugodic.txt"
   def initialize(fugodic)
+    @dictfile = fugodic
     Dir.mkdir(dictdir) unless File.exist?(dictdir)
     @candidates = []
     @dict = {}
     d = dictfile(charcode("kanji"))
 #    if !File.exist?(d) || File.mtime(d) < File.mtime(fugodic) then
     if !File.exist?(d) then
-      File.open(fugodic){ |f|
-        f.each { |line|
-          next if line =~ /^#/
-          line.chomp!
-          (yomi,word) = line.split(/\s+/)
-          if yomi && word then
-            if dict(yomi).nil? then
-              setdict(yomi,[])
-            end
-            dict(yomi) << [yomi,word]
-          end
-        }
-      }
-      @dict.each { |code,dic|
-        File.open(dictfile(code),"w"){ |f|
-          Marshal.dump(dic,f)
-        }
-      }
+      createDictCache(fugodic)
     end
   end
 
@@ -93,4 +98,3 @@ if __FILE__ == $0 then
   ws.search("^kanj")
   puts ws.candidates
 end
-
