@@ -57,7 +57,7 @@ class WordSearch
     d = dictfile(charcode("kanji"))
 #    if !File.exist?(d) || File.mtime(d) < File.mtime(fugodic) then
     if !File.exist?(d) then
-      createDictCache(fugodic)
+      createDictCache
     end
   end
 
