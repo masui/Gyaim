@@ -11,7 +11,7 @@ class WordSearch
   end
 
   def dictdir
-    "/tmp"
+    "/Users/masui/Gyaim/tmp"
   end
 
   def dictfile(code)
