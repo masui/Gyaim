@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>CEEDB99D13339FF400DD90B8</string>
+						<string>CEE8FC381333AE5B00CFCC2C</string>
 						<key>history</key>
 						<array>
-							<string>CE62483D13339F89002DDFE0</string>
+							<string>CE596FA41333AD9D00E2C93C</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -371,7 +371,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CEEDB99C13339FF400DD90B8</string>
+										<string>CEE8FC371333AE5B00CFCC2C</string>
 										<key>history</key>
 										<array>
 											<string>CE05D9E8132E3AFA00D1FC7F</string>
@@ -385,7 +385,7 @@
 											<string>CE4CC702132F408400AB1DBE</string>
 											<string>CEBB72F3132F894C00854DF8</string>
 											<string>CE0A544713302A6F00F6433F</string>
-											<string>CE62483C13339F89002DDFE0</string>
+											<string>CE596FA31333AD9D00E2C93C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -443,9 +443,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>CEEDB99813339FEB00DD90B8</string>
+				<string>CEE8FC331333AE5600CFCC2C</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>CEEDB99913339FEB00DD90B8</string>
+				<string>CEE8FC341333AE5600CFCC2C</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -584,8 +584,8 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>CEA7E6F7132E113600EF7235</string>
-		<string>/Users/masui/Gyaim/Gyaim.xcodeproj</string>
 		<string>CE40FE281332278400248465</string>
+		<string>/Users/masui/Gyaim/Gyaim.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>562 122 838 708 0 0 1440 878 </string>
@@ -665,7 +665,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>CEA7E6F7132E113600EF7235</string>
-				<string>CEEDB99B13339FEB00DD90B8</string>
+				<string>CEE8FC361333AE5600CFCC2C</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

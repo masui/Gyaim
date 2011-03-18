@@ -151,23 +151,21 @@ class GyaimController < IMKInputController
     #
     # WordSearch#search で検索して WordSearch#candidates で受け取る
     #
-    pat = @inputPat
-    pat.gsub(/[\{\}\[\]\(\)/,'\\' + $&)
     if @exactMode then
-      @ws.search("^#{pat}$")
+      @ws.search("^#{@inputPat}$")
       @candidates = @ws.candidates
-      katakana = pat.roma2katakana
+      katakana = @inputPat.roma2katakana
       @candidates.delete(katakana)
       @candidates.unshift(katakana) if katakana != ""
-      hiragana = pat.roma2hiragana
+      hiragana = @inputPat.roma2hiragana
       @candidates.delete(hiragana)
       @candidates.unshift(hiragana) if hiragana != ""
     else
-      @ws.search("^#{pat}")
+      @ws.search("^#{@inputPat}")
       @candidates = @ws.candidates
-      @candidates.unshift(pat)
+      @candidates.unshift(@inputPat)
       if @candidates.length < 8 then
-        hiragana = pat.roma2hiragana
+        hiragana = @inputPat.roma2hiragana
         @candidates.push(hiragana)
       end
     end

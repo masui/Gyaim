@@ -62,12 +62,14 @@ class WordSearch
   end
 
   def search(q,limit=10)
-    pat = /#{q}/
-    candfound = {}
-    @candidates = []
+    return if q.nil?
     s = q.sub(/^\^/,'') # 先頭の '^' を消す
     return if s == ''
     code = charcode(s)
+    qq = q.gsub(/[\{\}\[\]\(\)]/){ '\\' + $& }
+    pat = Regexp.new(qq)
+    candfound = {}
+    @candidates = []
     if !@dict[code] then
       File.open(dictfile(code)){ |f|
         @dict[code] = Marshal.load(f)
@@ -76,7 +78,8 @@ class WordSearch
     @dict[code].each { |entry|
       yomi = entry[0]
       word = entry[1]
-      if yomi =~ pat then
+#      if yomi =~ pat then
+      if pat.match(yomi) then
         if !candfound[word] then
           @candidates << word
           candfound[word] = true
