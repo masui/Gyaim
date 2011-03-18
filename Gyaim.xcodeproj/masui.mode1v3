@@ -202,46 +202,6 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>CE41E18913322A47006CD1C8</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>InfoPlist.strings</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>CE41E18A13322A47006CD1C8</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>InfoPlist.strings</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>CED4A9131332D001007012D6</string>
-						<key>history</key>
-						<array>
-							<string>CEFF8C761332534B00BB97EA</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {682, 573}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>625 196 682 614 0 0 1440 878 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
 				<string>CE40FE281332278400248465</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>Info.plist</string>
@@ -256,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>CED4A9151332D001007012D6</string>
+						<string>CEA7C20A13334FA000519289</string>
 						<key>history</key>
 						<array>
-							<string>CEFF8C781332534B00BB97EA</string>
+							<string>CEDE210D13334ED500C69904</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -411,7 +371,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CED4A9121332D001007012D6</string>
+										<string>CEA7C20913334FA000519289</string>
 										<key>history</key>
 										<array>
 											<string>CE05D9E8132E3AFA00D1FC7F</string>
@@ -425,7 +385,7 @@
 											<string>CE4CC702132F408400AB1DBE</string>
 											<string>CEBB72F3132F894C00854DF8</string>
 											<string>CE0A544713302A6F00F6433F</string>
-											<string>CEFF8C751332534B00BB97EA</string>
+											<string>CEDE210C13334ED500C69904</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -483,9 +443,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>CED4A90D1332CFE5007012D6</string>
+				<string>CEA7C20513334F9700519289</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>CED4A90E1332CFE5007012D6</string>
+				<string>CEA7C20613334F9700519289</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -624,9 +584,9 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>CEA7E6F7132E113600EF7235</string>
+		<string>CE41E18913322A47006CD1C8</string>
 		<string>/Users/masui/Gyaim/Gyaim.xcodeproj</string>
 		<string>CE40FE281332278400248465</string>
-		<string>CE41E18913322A47006CD1C8</string>
 	</array>
 	<key>WindowString</key>
 	<string>562 122 838 708 0 0 1440 878 </string>
@@ -706,7 +666,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>CEA7E6F7132E113600EF7235</string>
-				<string>CED4A9111332CFE5007012D6</string>
+				<string>CEA7C20813334F9700519289</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

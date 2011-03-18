@@ -11,7 +11,7 @@ class WordSearch
   end
 
   def dictdir
-    "/Users/masui/Gyaim/tmp"
+    File.expand_path("~/.gyaimdict")
   end
 
   def dictfile(code)
@@ -29,6 +29,7 @@ class WordSearch
   # fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
   # fugopath = "../Resources/fugodic.txt"
   def initialize(fugodic)
+    Dir.mkdir(dictdir) unless File.exist?(dictdir)
     @candidates = []
     @dict = {}
     d = dictfile(charcode("kanji"))
