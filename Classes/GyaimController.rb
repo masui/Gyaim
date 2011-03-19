@@ -9,7 +9,6 @@
 
 framework 'InputMethodKit'
 
-require 'Log'
 require 'WordSearch'
 require 'Romakana'
 
@@ -73,20 +72,18 @@ class GyaimController < IMKInputController
     kVirtual_Arrow_Up        = 0x7E
 
     @client = sender
-    Log.log "handleEvent: event.type = #{event.type}"
+    puts "handleEvent: event.type = #{event.type}"
     return false if event.type != NSKeyDown
 
     eventString = event.characters
     keyCode = event.keyCode
     modifierFlags = event.modifierFlags
 
-    Log.log "handleEvent: event = #{event}"
-    Log.log "handleEvent: sender = #{sender}"
-    Log.log "handleEvent: eventString=#{eventString}"
-    Log.log "handleEvent: keyCode=#{keyCode}"
-    Log.log "handleEvent: modifierFlags=#{modifierFlags}"
-
-    puts keyCode
+    puts "handleEvent: event = #{event}"
+    puts "handleEvent: sender = #{sender}"
+    puts "handleEvent: eventString=#{eventString}"
+    puts "handleEvent: keyCode=#{keyCode}"
+    puts "handleEvent: modifierFlags=#{modifierFlags}"
 
     return true if keyCode == kVirtual_JISKanaModeKey || keyCode == kVirtual_JISRomanModeKey
     return true if !eventString
@@ -98,7 +95,7 @@ class GyaimController < IMKInputController
     # する方法がわからないので...
     s = sprintf("%s",eventString) # NSStringを普通のStringに??
     c = s.each_byte.to_a[0]
-    Log.log sprintf("c = 0x%x",c)
+    puts sprintf("c = 0x%x",c)
 
     #
     # スペース、バックスペース、通常文字などの処理

@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>CE81461B13343800001B2BC4</string>
+						<string>CEC104831334B15B00FDCC67</string>
 						<key>history</key>
 						<array>
-							<string>CEE8FC381333AE5B00CFCC2C</string>
+							<string>CE81461B13343800001B2BC4</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -318,8 +318,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>19</integer>
-									<integer>13</integer>
+									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -371,7 +370,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CE81461A13343800001B2BC4</string>
+										<string>CEC104801334B15B00FDCC67</string>
 										<key>history</key>
 										<array>
 											<string>CE05D9E8132E3AFA00D1FC7F</string>
@@ -379,13 +378,12 @@
 											<string>CEFDEE8A132ECBDB005C9484</string>
 											<string>CEFDEE8B132ECBDB005C9484</string>
 											<string>CEFDEE8C132ECBDB005C9484</string>
-											<string>CEB9E69F132ECEE700F2ABDE</string>
 											<string>CE7465CB132ED06F00873646</string>
 											<string>CEBAEDDB132ED24600DAF9FC</string>
 											<string>CE4CC702132F408400AB1DBE</string>
 											<string>CEBB72F3132F894C00854DF8</string>
 											<string>CE0A544713302A6F00F6433F</string>
-											<string>CEE8FC371333AE5B00CFCC2C</string>
+											<string>CE81461A13343800001B2BC4</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -443,9 +441,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>CE814616133434F6001B2BC4</string>
+				<string>CEC104811334B15B00FDCC67</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>CE814617133434F6001B2BC4</string>
+				<string>CEC104821334B15B00FDCC67</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -665,7 +663,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>CEA7E6F7132E113600EF7235</string>
-				<string>CE814619133434F6001B2BC4</string>
+				<string>CEC104841334B15B00FDCC67</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
