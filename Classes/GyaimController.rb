@@ -20,7 +20,7 @@ class GyaimController < IMKInputController
 
   def initWithServer(server, delegate:d, client:c)
     # Log.log "initWithServer delegate=#{d}, client="#{c}"
-    # @client = c   # Lexierraではこれをnilにしてた。何故?
+    @client = c   # Lexierraではこれをnilにしてた。何故?
 
     # これが何故必要なのか不明
     @candwin = NSApp.delegate.candwin
@@ -86,6 +86,8 @@ class GyaimController < IMKInputController
     Log.log "handleEvent: keyCode=#{keyCode}"
     Log.log "handleEvent: modifierFlags=#{modifierFlags}"
 
+    puts keyCode
+
     return true if keyCode == kVirtual_JISKanaModeKey || keyCode == kVirtual_JISRomanModeKey
     return true if !eventString
     return true if eventString.length == 0
@@ -150,6 +152,9 @@ class GyaimController < IMKInputController
   def searchAndShowCands
     #
     # WordSearch#search で検索して WordSearch#candidates で受け取る
+    #
+    # @ws.searchmode == 0 前方マッチ
+    # @ws.searchmode == 1 完全マッチ ひらがな/カタカナも候補に加える
     #
     if @ws.searchmode > 0 then
       @ws.search(@inputPat)
