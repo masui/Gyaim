@@ -64,12 +64,15 @@ class WordSearch
   end
 
   def search(q,limit=10)
+    # @searchmode=0のとき前方マッチ, @searchmode=1のとき完全マッチとする
+
     return if q.nil? || q == ''
 
-    code = charcode(q)
     qq = q.gsub(/[\{\}\[\]\(\)]/){ '\\' + $& }
     pat = Regexp.new(@searchmode > 0 ? "^#{qq}$" : "^#{qq}")
+
     candfound = {}
+    code = charcode(q)
     @candidates = []
     if !@dict[code] then
       File.open(dictfile(code)){ |f|
@@ -79,7 +82,6 @@ class WordSearch
     @dict[code].each { |entry|
       yomi = entry[0]
       word = entry[1]
-#      if yomi =~ pat then
       if pat.match(yomi) then
         if !candfound[word] then
           @candidates << word

@@ -52,7 +52,6 @@ class GyaimController < IMKInputController
     @inputPat = ""
     @candidates = []
     @nthCand = 0
-    # @exactMode = false
     @ws.searchmode = 0
   end
 
@@ -123,12 +122,10 @@ class GyaimController < IMKInputController
       end
     elsif c == 0x0a || c == 0x0d then
       if converting then
-        # if @exactMode then
         if @ws.searchmode > 0 then
           fix
         else
           if @nthCand == 0 then
-            # @exactMode = true
             @ws.searchmode = 1
             searchAndShowCands
           else
@@ -138,11 +135,9 @@ class GyaimController < IMKInputController
         handled = true
       end
     elsif c >= 0x21 && c <= 0x7e && (modifierFlags & NSControlKeyMask) == 0 then
-#      fix if @nthCand > 0 || @exactMode
       fix if @nthCand > 0 || @ws.searchmode > 0
       @inputPat += eventString
       searchAndShowCands
-#      @exactMode = false
       @ws.searchmode = 0
       handled = true
     end
@@ -156,7 +151,6 @@ class GyaimController < IMKInputController
     #
     # WordSearch#search で検索して WordSearch#candidates で受け取る
     #
-#    if @exactMode then
     if @ws.searchmode > 0 then
       @ws.search(@inputPat)
       @candidates = @ws.candidates
@@ -186,27 +180,24 @@ class GyaimController < IMKInputController
       # @client.insertText(word)
       @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
     end
-#    @exactMode = false
     resetState
   end
 
   def showCands
-#    if converting && @candidates.length > @nthCand then
-      #
-      # 選択中の単語をキャレット位置にアンダーライン表示
-      #
-      word = @candidates[@nthCand]
-      if word then
-        kTSMHiliteRawText = 2
-        attr = self.markForStyle(kTSMHiliteRawText,atRange:NSMakeRange(0,word.length))
-        attrstr = NSAttributedString.alloc.initWithString(word,attributes:attr)
-        @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, NSNotFound))
-      end
-      #
-      # 候補単語リストを表示
-      #
-      @textview.setString(@candidates[@nthCand+1 .. @nthCand+1+10].join(' '))
-#    end
+    #
+    # 選択中の単語をキャレット位置にアンダーライン表示
+    #
+    word = @candidates[@nthCand]
+    if word then
+      kTSMHiliteRawText = 2
+      attr = self.markForStyle(kTSMHiliteRawText,atRange:NSMakeRange(0,word.length))
+      attrstr = NSAttributedString.alloc.initWithString(word,attributes:attr)
+      @client.setMarkedText(attrstr,selectionRange:NSMakeRange(word.length,0),replacementRange:NSMakeRange(NSNotFound, NSNotFound))
+    end
+    #
+    # 候補単語リストを表示
+    #
+    @textview.setString(@candidates[@nthCand+1 .. @nthCand+1+10].join(' '))
   end
 
   #
