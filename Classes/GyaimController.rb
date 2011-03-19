@@ -26,9 +26,9 @@ class GyaimController < IMKInputController
     @candwin = NSApp.delegate.candwin
     @textview = NSApp.delegate.textview
 
-    # 富豪辞書サーチ
-    fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
-    @ws = WordSearch.new(fugopath)
+    # 辞書サーチ
+    dictpath = NSBundle.mainBundle.pathForResource("dict", ofType:"txt")
+    @ws = WordSearch.new(dictpath)
 
     resetState
 

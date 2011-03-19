@@ -8,7 +8,7 @@ require 'WordSearch/WordSearch'
 
 class WordSearchTest < Test::Unit::TestCase
   def setup
-    @ws = WordSearch.new('Resources/fugodic.txt')
+    @ws = WordSearch.new('Resources/dict.txt')
   end
   
   def teardown

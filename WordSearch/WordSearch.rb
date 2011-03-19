@@ -47,15 +47,15 @@ class WordSearch
     }
   end
 
-  # fugopath = NSBundle.mainBundle.pathForResource("fugodic", ofType:"txt")
-  # fugopath = "../Resources/fugodic.txt"
-  def initialize(fugodic)
-    @dictfile = fugodic
+  # dict = NSBundle.mainBundle.pathForResource("dict", ofType:"txt")
+  # dict = "../Resources/dict.txt"
+  def initialize(dict)
+    @dictfile = dict
     Dir.mkdir(dictdir) unless File.exist?(dictdir)
     @candidates = []
     @dict = {}
     d = dictfile(charcode("kanji"))
-#    if !File.exist?(d) || File.mtime(d) < File.mtime(fugodic) then
+#    if !File.exist?(d) || File.mtime(d) < File.mtime(dict) then
     if !File.exist?(d) then
       createDictCache
     end
@@ -95,7 +95,7 @@ class WordSearch
 end
 
 if __FILE__ == $0 then
-  ws = WordSearch.new("/Users/masui/Gyaim/Resources/fugodic.txt")
+  ws = WordSearch.new("/Users/masui/Gyaim/Resources/dict.txt")
   ws.search("^masui")
   puts ws.candidates
   ws.search("^kanj")
