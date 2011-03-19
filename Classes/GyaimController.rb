@@ -52,7 +52,8 @@ class GyaimController < IMKInputController
     @inputPat = ""
     @candidates = []
     @nthCand = 0
-    @exactMode = false
+    # @exactMode = false
+    @ws.searchmode = 0
   end
 
   def converting
@@ -122,11 +123,13 @@ class GyaimController < IMKInputController
       end
     elsif c == 0x0a || c == 0x0d then
       if converting then
-        if @exactMode then
+        # if @exactMode then
+        if @ws.searchmode > 0 then
           fix
         else
           if @nthCand == 0 then
-            @exactMode = true
+            # @exactMode = true
+            @ws.searchmode = 1
             searchAndShowCands
           else
             fix
@@ -135,10 +138,12 @@ class GyaimController < IMKInputController
         handled = true
       end
     elsif c >= 0x21 && c <= 0x7e && (modifierFlags & NSControlKeyMask) == 0 then
-      fix if @nthCand > 0 || @exactMode
+#      fix if @nthCand > 0 || @exactMode
+      fix if @nthCand > 0 || @ws.searchmode > 0
       @inputPat += eventString
       searchAndShowCands
-      @exactMode = false
+#      @exactMode = false
+      @ws.searchmode = 0
       handled = true
     end
 
@@ -151,8 +156,9 @@ class GyaimController < IMKInputController
     #
     # WordSearch#search で検索して WordSearch#candidates で受け取る
     #
-    if @exactMode then
-      @ws.search("^#{@inputPat}$")
+#    if @exactMode then
+    if @ws.searchmode > 0 then
+      @ws.search(@inputPat)
       @candidates = @ws.candidates
       katakana = @inputPat.roma2katakana
       @candidates.delete(katakana)
@@ -161,7 +167,7 @@ class GyaimController < IMKInputController
       @candidates.delete(hiragana)
       @candidates.unshift(hiragana) if hiragana != ""
     else
-      @ws.search("^#{@inputPat}")
+      @ws.search(@inputPat)
       @candidates = @ws.candidates
       @candidates.unshift(@inputPat)
       if @candidates.length < 8 then
@@ -180,7 +186,7 @@ class GyaimController < IMKInputController
       # @client.insertText(word)
       @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
     end
-    @exactMode = false
+#    @exactMode = false
     resetState
   end
 

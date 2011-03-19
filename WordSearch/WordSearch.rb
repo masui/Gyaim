@@ -6,6 +6,8 @@
 # Copyright 2011 Pitecan Systems. All rights reserved.
 
 class WordSearch
+  attr :searchmode, true
+
   def charcode(s)
     sprintf("%02x",s.each_byte.to_a[0])
   end
@@ -62,12 +64,11 @@ class WordSearch
   end
 
   def search(q,limit=10)
-    return if q.nil?
-    s = q.sub(/^\^/,'') # 先頭の '^' を消す
-    return if s == ''
-    code = charcode(s)
+    return if q.nil? || q == ''
+
+    code = charcode(q)
     qq = q.gsub(/[\{\}\[\]\(\)]/){ '\\' + $& }
-    pat = Regexp.new(qq)
+    pat = Regexp.new(@searchmode > 0 ? "^#{qq}$" : "^#{qq}")
     candfound = {}
     @candidates = []
     if !@dict[code] then
