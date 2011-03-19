@@ -15,3 +15,5 @@ largedict:
 	cp Resources/fugodic.txt Resources/dict.txt
 smalldict:
 	head -20000 Resources/fugodic.txt > Resources/dict.txt
+clean:
+	/bin/rm -f *~ */*~
