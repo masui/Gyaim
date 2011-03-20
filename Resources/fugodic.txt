@@ -151,6 +151,7 @@ houshiki	方式
 housiki	方式
 naranai	ならない
 tekisuto	テキスト
+kenkyuujo	研究所
 kenkyuusho	研究所
 kenkyuusyo	研究所
 sentaku	選択
