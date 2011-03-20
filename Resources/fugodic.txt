@@ -74612,8 +74612,6 @@ tuuyouguchi	通用口
 tuuyouguti	通用口
 tsuuyoumon	通用門
 tuuyoumon	通用門
-tsukuttahito	桂川敬史
-tukuttahito	桂川敬史
 tsukuribanashi	作り話
 tsukuribanasi	作り話
 tukuribanashi	作り話
