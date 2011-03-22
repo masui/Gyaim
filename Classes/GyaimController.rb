@@ -85,6 +85,17 @@ class GyaimController < IMKInputController
     puts "handleEvent: keyCode=#{keyCode}"
     puts "handleEvent: modifierFlags=#{modifierFlags}"
 
+    # 選択されている文字列があれば覚えておく
+    # 後で登録に利用するかも
+    range = @client.selectedRange
+    astr = @client.attributedSubstringFromRange(range)
+    if astr then
+      s = astr.string
+      # s = sprintf("%s",s)
+      @selectedstr = s if s != ""
+      puts "-------#{s}"
+    end
+
     return true if keyCode == kVirtual_JISKanaModeKey || keyCode == kVirtual_JISRomanModeKey
     return true if !eventString
     return true if eventString.length == 0
@@ -170,6 +181,9 @@ class GyaimController < IMKInputController
         hiragana = @inputPat.roma2hiragana
         @candidates.push(hiragana)
       end
+
+      @candidates.push(@selectedstr) if @selectedstr && @selectedstr != ''
+
     end
     @nthCand = 0
     showCands
