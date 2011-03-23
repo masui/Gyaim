@@ -14,7 +14,9 @@ xcodebuild:
 install:
 	cp -r build/Debug/Gyaim.app ~/Library/Input\ Methods
 dictcache:
-	ruby -e 'require "WordSearch/WordSearch"; ws = WordSearch.new("Resources/dict.txt"); ws.createDictCache;'
+	ruby -e 'require "WordSearch/WordSearch"; DictCache.createCache("Resources/dict.txt");'
+#	ruby -e 'require "WordSearch/WordSearch"; ws = WordSearch.new("Resources/dict.txt"); ws.createDictCache;'
+
 #
 # 富豪辞書を利用
 #

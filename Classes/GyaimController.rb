@@ -194,6 +194,7 @@ class GyaimController < IMKInputController
       @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
       if word == @selectedstr then
         @ws.register(word,@inputPat)
+        @selectedstr = nil
       end
     end
     resetState
