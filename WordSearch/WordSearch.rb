@@ -8,24 +8,24 @@
 class WordSearch
   attr :searchmode, true
 
-  def charcode(s)
+  def charCode(s)
     sprintf("%02x",s.each_byte.to_a[0])
   end
 
-  def dictdir
+  def dictDir
     File.expand_path("~/.gyaimdict")
   end
 
-  def dictfile(code)
-    "#{dictdir}/dict#{code}"
+  def dictmarshalfile(code)
+    "#{dictDir}/dict#{code}"
   end
 
   def dict(s)
-    @dict[charcode(s)]
+    @dict[charCode(s)]
   end
 
   def setdict(s,val)
-    @dict[charcode(s)] = val
+    @dict[charCode(s)] = val
   end
 
   def createDictCache
@@ -43,7 +43,7 @@ class WordSearch
       }
     }
     @dict.each { |code,dic|
-      File.open(dictfile(code),"w"){ |f|
+      File.open(dictmarshalfile(code),"w"){ |f|
         Marshal.dump(dic,f)
       }
     }
@@ -53,10 +53,10 @@ class WordSearch
   # dict = "../Resources/dict.txt"
   def initialize(dict)
     @dictfile = dict
-    Dir.mkdir(dictdir) unless File.exist?(dictdir)
+    Dir.mkdir(dictDir) unless File.exist?(dictDir)
     @candidates = []
     @dict = {}
-    d = dictfile(charcode("kanji"))
+    d = dictmarshalfile(charCode("kanji"))
 #    if !File.exist?(d) || File.mtime(d) < File.mtime(dict) then
     if !File.exist?(d) then
       createDictCache
@@ -72,10 +72,10 @@ class WordSearch
     pat = Regexp.new(@searchmode > 0 ? "^#{qq}$" : "^#{qq}")
 
     candfound = {}
-    code = charcode(q)
+    code = charCode(q)
     @candidates = []
     if !@dict[code] then
-      File.open(dictfile(code)){ |f|
+      File.open(dictmarshalfile(code)){ |f|
         @dict[code] = Marshal.load(f)
       }
     end
@@ -95,6 +95,12 @@ class WordSearch
   def candidates
     @candidates
   end
+
+  def register(word,yomi)
+    puts "register(#{word},#{yomi})"
+    # 登録辞書、学習辞書をどうするかが問題である
+  end
+
 end
 
 if __FILE__ == $0 then

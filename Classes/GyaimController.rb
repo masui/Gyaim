@@ -72,18 +72,18 @@ class GyaimController < IMKInputController
     kVirtual_Arrow_Up        = 0x7E
 
     @client = sender
-    puts "handleEvent: event.type = #{event.type}"
+    # puts "handleEvent: event.type = #{event.type}"
     return false if event.type != NSKeyDown
 
     eventString = event.characters
     keyCode = event.keyCode
     modifierFlags = event.modifierFlags
 
-    puts "handleEvent: event = #{event}"
-    puts "handleEvent: sender = #{sender}"
-    puts "handleEvent: eventString=#{eventString}"
-    puts "handleEvent: keyCode=#{keyCode}"
-    puts "handleEvent: modifierFlags=#{modifierFlags}"
+    # puts "handleEvent: event = #{event}"
+    # puts "handleEvent: sender = #{sender}"
+    # puts "handleEvent: eventString=#{eventString}"
+    # puts "handleEvent: keyCode=#{keyCode}"
+    # puts "handleEvent: modifierFlags=#{modifierFlags}"
 
     # 選択されている文字列があれば覚えておく
     # 後で登録に利用するかも
@@ -91,9 +91,7 @@ class GyaimController < IMKInputController
     astr = @client.attributedSubstringFromRange(range)
     if astr then
       s = astr.string
-      # s = sprintf("%s",s)
       @selectedstr = s if s != ""
-      puts "-------#{s}"
     end
 
     return true if keyCode == kVirtual_JISKanaModeKey || keyCode == kVirtual_JISRomanModeKey
@@ -106,7 +104,7 @@ class GyaimController < IMKInputController
     # する方法がわからないので...
     s = sprintf("%s",eventString) # NSStringを普通のStringに??
     c = s.each_byte.to_a[0]
-    puts sprintf("c = 0x%x",c)
+    # puts sprintf("c = 0x%x",c)
 
     #
     # スペース、バックスペース、通常文字などの処理
@@ -176,13 +174,12 @@ class GyaimController < IMKInputController
     else
       @ws.search(@inputPat)
       @candidates = @ws.candidates
+      @candidates.unshift(@selectedstr) if @selectedstr && @selectedstr != ''
       @candidates.unshift(@inputPat)
       if @candidates.length < 8 then
         hiragana = @inputPat.roma2hiragana
         @candidates.push(hiragana)
       end
-
-      @candidates.push(@selectedstr) if @selectedstr && @selectedstr != ''
 
     end
     @nthCand = 0
@@ -195,6 +192,9 @@ class GyaimController < IMKInputController
       # 何故かinsertTextだとhandleEventが呼ばれてしまうようで
       # @client.insertText(word)
       @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
+      if word == @selectedstr then
+        @ws.register(word,@inputPat)
+      end
     end
     resetState
   end
