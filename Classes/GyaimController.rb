@@ -154,6 +154,16 @@ class GyaimController < IMKInputController
     return handled
   end
 
+  def wordpart(e) # 候補が[単語, 読み]のような配列で返ってくるとき単語部分だけ取得
+    e.class == String ? e : e[0]
+  end
+  
+  def delete(a,s)
+    a.find_all { |e|
+      wordpart(e) != s
+    }
+  end
+
   # 単語検索して候補の配列作成
   def searchAndShowCands
     #
@@ -166,11 +176,15 @@ class GyaimController < IMKInputController
       @ws.search(@inputPat)
       @candidates = @ws.candidates
       katakana = @inputPat.roma2katakana
-      @candidates.delete(katakana)
-      @candidates.unshift(katakana) if katakana != ""
+      if katakana != "" then
+        @candidates = delete(@candidates,katakana)
+        @candidates.unshift(katakana)
+      end
       hiragana = @inputPat.roma2hiragana
-      @candidates.delete(hiragana)
-      @candidates.unshift(hiragana) if hiragana != ""
+      if hiragana != "" then
+        @candidates = delete(@candidates,hiragana)
+        @candidates.unshift(hiragana)
+      end
     else
       @ws.search(@inputPat)
       @candidates = @ws.candidates
@@ -188,7 +202,7 @@ class GyaimController < IMKInputController
   
   def fix
     if @candidates.length > @nthCand then
-      word = @candidates[@nthCand]
+      word = wordpart(@candidates[@nthCand])
       # 何故かinsertTextだとhandleEventが呼ばれてしまうようで
       # @client.insertText(word)
       @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
@@ -204,7 +218,10 @@ class GyaimController < IMKInputController
     #
     # 選択中の単語をキャレット位置にアンダーライン表示
     #
-    word = @candidates[@nthCand]
+    @cands = @candidates.collect { |e|
+      wordpart(e)
+    }
+    word = @cands[@nthCand]
     if word then
       kTSMHiliteRawText = 2
       attr = self.markForStyle(kTSMHiliteRawText,atRange:NSMakeRange(0,word.length))
@@ -214,7 +231,7 @@ class GyaimController < IMKInputController
     #
     # 候補単語リストを表示
     #
-    @textview.setString(@candidates[@nthCand+1 .. @nthCand+1+10].join(' '))
+    @textview.setString(@cands[@nthCand+1 .. @nthCand+1+10].join(' '))
   end
 
   #

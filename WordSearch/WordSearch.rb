@@ -117,23 +117,12 @@ class WordSearch
     candfound = {}
     @candidates = []
 
-    @localdict.each { |entry|
+    (@localdict + @dc[q]).each { |entry|
       yomi = entry[0]
       word = entry[1]
       if pat.match(yomi) then
         if !candfound[word] then
-          @candidates << word
-          candfound[word] = true
-          break if @candidates.length > limit
-        end
-      end
-    }
-    @dc[q].each { |entry|
-      yomi = entry[0]
-      word = entry[1]
-      if pat.match(yomi) then
-        if !candfound[word] then
-          @candidates << word
+          @candidates << [word, yomi]
           candfound[word] = true
           break if @candidates.length > limit
         end
