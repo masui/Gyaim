@@ -43,6 +43,9 @@ class GyaimController < IMKInputController
     showWindow
   end
 
+  #
+  # 別の入力システムに切り換わったとき呼ばれる
+  #
   def deactivateServer(sender)
     hideWindow
     @ws.savestudy

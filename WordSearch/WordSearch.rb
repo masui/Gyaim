@@ -89,11 +89,14 @@ class WordSearch
   def initialize(*dictfiles)
     @searchmode = 0
     Dir.mkdir(dictDir) unless File.exist?(dictDir)
+
+    # 固定辞書初期化
     @dc = DictCache.new
     if !@dc["kanji"] then
       DictCache.createCache(dictfiles)
     end
 
+    # 個人辞書を読出し
     @localdict = []
     if File.exist?(localDictFile) then
       File.open(localDictFile){ |f|
@@ -109,6 +112,7 @@ class WordSearch
       }
     end
 
+    # 学習辞書を読出し
     @studydict = []
     if File.exist?(studyDictFile) then
       File.open(studyDictFile){ |f|
@@ -153,7 +157,9 @@ class WordSearch
     @candidates
   end
 
-  # 登録辞書、学習辞書をどうするかが問題である
+  #
+  # ユーザ辞書登録
+  #
   def register(word,yomi)
     puts "register(#{word},#{yomi})"
     @localdict.unshift([yomi,word])
@@ -166,8 +172,11 @@ class WordSearch
     }
   end
 
+  #
+  # 学習辞書の扱い
+  #
   def study(word,yomi)
-    puts "study(#{word},#{yomi})"
+    # puts "study(#{word},#{yomi})"
     @studydict.unshift([yomi,word])
     @studydict = @studydict[0..1000] # 1000行に制限
   end
