@@ -108,23 +108,42 @@ class WordSearch
 
     return if q.nil? || q == ''
 
-    qq = q.gsub(/[\{\}\[\]\(\)]/){ '\\' + $& }
-    pat = Regexp.new(@searchmode > 0 ? "^#{qq}$" : "^#{qq}")
-
     candfound = {}
     @candidates = []
 
-    (@studydict + @localdict + @dc[q]).each { |entry|
-      yomi = entry[0]
-      word = entry[1]
-      if pat.match(yomi) then
-        if !candfound[word] then
-          @candidates << [word, yomi]
-          candfound[word] = true
-          break if @candidates.length > limit
+    if q.length > 1 && q.sub!(/\.$/,'') then
+      require 'net/http'
+      require 'nkf'
+      registered = {}
+      words = []
+      Net::HTTP.start('google.co.jp', 80) {|http|
+        response = http.get("/complete/search?output=toolbar&hl=ja&q=#{q}")
+        s = response.body.to_s
+        s = NKF.nkf('-w',s)
+        while s.sub!(/data="([^"]*)"\/>/,'') do
+          word = $1.split[0]
+          if !candfound[word] then
+            candfound[word] = 1
+            @candidates << word
+          end
         end
-      end
-    }
+      }
+    else
+      qq = q.gsub(/[\{\}\[\]\(\)]/){ '\\' + $& }
+      pat = Regexp.new(@searchmode > 0 ? "^#{qq}$" : "^#{qq}")
+
+      (@studydict + @localdict + @dc[q]).each { |entry|
+        yomi = entry[0]
+        word = entry[1]
+        if pat.match(yomi) then
+          if !candfound[word] then
+            @candidates << [word, yomi]
+            candfound[word] = true
+            break if @candidates.length > limit
+          end
+        end
+      }
+    end
   end
   
   def candidates
