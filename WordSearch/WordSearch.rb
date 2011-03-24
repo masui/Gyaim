@@ -80,6 +80,10 @@ class WordSearch
     "#{dictDir}/localdict.txt"
   end
 
+  def studyDictFile
+    "#{dictDir}/studydict.txt"
+  end
+
   # dict = NSBundle.mainBundle.pathForResource("dict", ofType:"txt")
   # dict = "../Resources/dict.txt"
   def initialize(*dictfiles)
@@ -104,6 +108,21 @@ class WordSearch
         }
       }
     end
+
+    @studydict = []
+    if File.exist?(studyDictFile) then
+      File.open(studyDictFile){ |f|
+        f.each { |line|
+          next if line =~ /^#/
+          next if line =~ /^\s*$/
+          line.chomp!
+          (yomi,word) = line.split(/\s+/)
+          if yomi && word then
+            @studydict << [yomi, word]
+          end
+        }
+      }
+    end
   end
 
   def search(q,limit=10)
@@ -117,7 +136,7 @@ class WordSearch
     candfound = {}
     @candidates = []
 
-    (@localdict + @dc[q]).each { |entry|
+    (@studydict + @localdict + @dc[q]).each { |entry|
       yomi = entry[0]
       word = entry[1]
       if pat.match(yomi) then
@@ -143,6 +162,28 @@ class WordSearch
         yomi = entry[0]
         word = entry[1]
         f.puts "#{yomi}\t#{word}"
+      }
+    }
+  end
+
+  def study(word,yomi)
+    puts "study(#{word},#{yomi})"
+    @studydict.unshift([yomi,word])
+    @studydict = @studydict[0..1000] # 1000行に制限
+  end
+
+  def savestudy
+    puts "savestudy"
+    saved = {}
+    File.open(studyDictFile,"w"){ |f|
+      @studydict.each { |entry|
+        yomi = entry[0]
+        word = entry[1]
+        s = "#{yomi}\t#{word}"
+        if !saved[s] then
+          f.puts s
+          saved[s] = true
+        end
       }
     }
   end

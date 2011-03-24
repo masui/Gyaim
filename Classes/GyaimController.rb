@@ -45,6 +45,7 @@ class GyaimController < IMKInputController
 
   def deactivateServer(sender)
     hideWindow
+    @ws.savestudy
   end
 
   def resetState
@@ -209,6 +210,13 @@ class GyaimController < IMKInputController
       if word == @selectedstr then
         @ws.register(word,@inputPat)
         @selectedstr = nil
+      else
+        c = @candidates[@nthCand]
+        if c.class == Array then
+          @ws.study(c[0],c[1])
+        else
+          @ws.study(word,@inputPat)
+        end
       end
     end
     resetState
