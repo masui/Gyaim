@@ -182,12 +182,12 @@ class WordSearch
     }
   end
 
-  def loadstudy
+  def start
     puts "loadstudy"
     @studydict = loadDict(studyDictFile)
   end
 
-  def savestudy
+  def finish
     puts "savestudy"
     saveDict(studyDictFile,@studydict)
   end

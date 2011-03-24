@@ -41,7 +41,7 @@ class GyaimController < IMKInputController
   #
   def activateServer(sender)
     showWindow
-    @ws.loadstudy
+    @ws.start
   end
 
   #
@@ -49,7 +49,7 @@ class GyaimController < IMKInputController
   #
   def deactivateServer(sender)
     hideWindow
-    @ws.savestudy
+    @ws.finish
   end
 
   def resetState
