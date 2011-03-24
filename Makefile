@@ -36,3 +36,7 @@ clean:
 #
 test:
 	macruby Tests/run_suite.rb
+
+push:
+	git push pitecan.com:/home/masui/git/Gyaim.git
+	git push git@github.com:masui/Gyaim.git
