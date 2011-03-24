@@ -97,36 +97,10 @@ class WordSearch
     end
 
     # 個人辞書を読出し
-    @localdict = []
-    if File.exist?(localDictFile) then
-      File.open(localDictFile){ |f|
-        f.each { |line|
-          next if line =~ /^#/
-          next if line =~ /^\s*$/
-          line.chomp!
-          (yomi,word) = line.split(/\s+/)
-          if yomi && word then
-            @localdict << [yomi, word]
-          end
-        }
-      }
-    end
+    @localdict = loadDict(localDictFile) 
 
     # 学習辞書を読出し
-    @studydict = []
-    if File.exist?(studyDictFile) then
-      File.open(studyDictFile){ |f|
-        f.each { |line|
-          next if line =~ /^#/
-          next if line =~ /^\s*$/
-          line.chomp!
-          (yomi,word) = line.split(/\s+/)
-          if yomi && word then
-            @studydict << [yomi, word]
-          end
-        }
-      }
-    end
+    @studydict = loadDict(studyDictFile)
   end
 
   def search(q,limit=10)
@@ -163,13 +137,7 @@ class WordSearch
   def register(word,yomi)
     puts "register(#{word},#{yomi})"
     @localdict.unshift([yomi,word])
-    File.open(localDictFile,"w"){ |f|
-      @localdict.each { |entry|
-        yomi = entry[0]
-        word = entry[1]
-        f.puts "#{yomi}\t#{word}"
-      }
-    }
+    saveDict(localDictFile,@localdict)
   end
 
   #
@@ -181,11 +149,28 @@ class WordSearch
     @studydict = @studydict[0..1000] # 1000行に制限
   end
 
-  def savestudy
-    puts "savestudy"
+  def loadDict(dictfile)
+    dict = []
+    if File.exist?(dictfile) then
+      File.open(dictfile){ |f|
+        f.each { |line|
+          next if line =~ /^#/
+          next if line =~ /^\s*$/
+          line.chomp!
+          (yomi,word) = line.split(/\s+/)
+          if yomi && word then
+            dict << [yomi, word]
+          end
+        }
+      }
+    end
+    dict
+  end
+
+  def saveDict(dictfile,dict)
     saved = {}
-    File.open(studyDictFile,"w"){ |f|
-      @studydict.each { |entry|
+    File.open(dictfile,"w"){ |f|
+      dict.each { |entry|
         yomi = entry[0]
         word = entry[1]
         s = "#{yomi}\t#{word}"
@@ -195,6 +180,16 @@ class WordSearch
         end
       }
     }
+  end
+
+  def loadstudy
+    puts "loadstudy"
+    @studydict = loadDict(studyDictFile)
+  end
+
+  def savestudy
+    puts "savestudy"
+    saveDict(studyDictFile,@studydict)
   end
 
 end

@@ -41,6 +41,7 @@ class GyaimController < IMKInputController
   #
   def activateServer(sender)
     showWindow
+    @ws.loadstudy
   end
 
   #
@@ -56,6 +57,7 @@ class GyaimController < IMKInputController
     @candidates = []
     @nthCand = 0
     @ws.searchmode = 0
+    @selectedstr = nil
   end
 
   def converting
