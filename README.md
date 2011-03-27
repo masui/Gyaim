@@ -1,5 +1,6 @@
-MacRubyで作ったMac用のIMEです。
+# Gyaim
 
+ *MacRubyで作ったMac用のIMEです。
  * 500行ぐらいのRubyでIMEができることを示すものです
  * 変換部分は超いい加減なので注意
   - 予測機能がありません
@@ -13,7 +14,7 @@ MacRubyで作ったMac用のIMEです。
   - ~/.gyaimdict/localdict.txt
   - ~/.gyaimdict/studydict.txt
 
-TODO:
+## TODO
 
  * ローマ字が未確定のとき入力モードを切り換えたらローマ字を確定する
   - disactivate処理を追加
@@ -32,7 +33,7 @@ TODO:
  * SocialIMEとかGoogleIMEとかを呼ぶ
  * まともな変換システムを自力で作る
 
-論文ネタ
+## 論文ネタ
 
  * IME用のヒントを与えるアプリケーション
    <input type="text" hint="kamakura_address">
