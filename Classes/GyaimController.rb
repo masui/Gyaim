@@ -221,6 +221,7 @@ class GyaimController < IMKInputController
         if c.class == Array then
           @ws.study(c[0],c[1])
         else
+          # 読みが未登録 = ユーザ辞書に登録されていない
           @ws.study(word,@inputPat)
         end
       end

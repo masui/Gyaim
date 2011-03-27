@@ -157,15 +157,21 @@ class WordSearch
   #
   def register(word,yomi)
     puts "register(#{word},#{yomi})"
-    @localdict.unshift([yomi,word])
-    saveDict(localDictFile,@localdict)
+    if !@localdict.index([yomi,word]) then
+      @localdict.unshift([yomi,word])
+      saveDict(localDictFile,@localdict)
+    end
   end
 
   #
   # 学習辞書の扱い
   #
   def study(word,yomi)
-    # puts "study(#{word},#{yomi})"
+    puts "study(#{word},#{yomi})"
+    # すでに学習辞書に登録されている場合はユーザ辞書に登録してしまう
+    if @studydict.map { |e| e[1] } .index(word) then
+      register(word,yomi)
+    end
     @studydict.unshift([yomi,word])
     @studydict = @studydict[0..1000] # 1000行に制限
   end
