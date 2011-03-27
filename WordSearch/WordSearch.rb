@@ -112,6 +112,7 @@ class WordSearch
     @candidates = []
 
     if q.length > 1 && q.sub!(/\.$/,'') then
+      # Google Suggestを検索
       require 'net/http'
       require 'nkf'
       registered = {}
@@ -129,7 +130,8 @@ class WordSearch
         end
       }
     else
-      qq = q.gsub(/[\{\}\[\]\(\)]/){ '\\' + $& }
+      # 普通に検索
+      qq = q.gsub(/[\.\{\}\[\]\(\)]/){ '\\' + $& }
       pat = Regexp.new(@searchmode > 0 ? "^#{qq}$" : "^#{qq}")
 
       (@studydict + @localdict + @dc[q]).each { |entry|
