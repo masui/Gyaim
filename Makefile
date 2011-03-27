@@ -32,7 +32,7 @@ clean:
 	/bin/rm -f *~ */*~
 #
 # Ruby1.9のmacrubyを使うとmake testが失敗するが気にしない
-# 1.8なら大丈夫
+# 1.8なら大丈夫?
 #
 test:
 	macruby Tests/run_suite.rb
