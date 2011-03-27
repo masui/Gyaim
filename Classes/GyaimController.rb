@@ -49,6 +49,7 @@ class GyaimController < IMKInputController
   #
   def deactivateServer(sender)
     hideWindow
+    fix
     @ws.finish
   end
 

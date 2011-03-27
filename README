@@ -15,6 +15,8 @@ MacRubyで作ったMac用のIMEです。
 
 TODO:
 
+ * ローマ字が未確定のとき入力モードを切り換えたらローマ字を確定する
+  - disactivate処理を追加
  * 辞書キャッシュの扱い
   - Resourceに入れる
    - make dictでキャッシュをResource内に作る
