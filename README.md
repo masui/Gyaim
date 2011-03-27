@@ -11,25 +11,25 @@
     - それを確定すると登録される
  * 見栄えや変換はいろいろ変えてみて下さいな
  * ユーザ辞書、学習辞書
-  - ~/.gyaimdict/localdict.txt
-  - ~/.gyaimdict/studydict.txt
+    - ~/.gyaimdict/localdict.txt
+    - ~/.gyaimdict/studydict.txt
 
 ## TODO
 
  * ローマ字が未確定のとき入力モードを切り換えたらローマ字を確定する
-  - disactivate処理を追加
+    - disactivate処理を追加
  * 辞書キャッシュの扱い
-  - Resourceに入れる
-   - make dictでキャッシュをResource内に作る
-  - Marshalを利用するのをやめる
+    - Resourceに入れる
+    - make dictでキャッシュをResource内に作る
+        - Marshalを利用するのをやめる
  * 登録機能
-  - 登録が滅茶苦茶簡単なシステムを作りたい
-   - 研究になるかも?
+    - 登録が滅茶苦茶簡単なシステムを作りたい
+    - 研究になるかも?
  * 様々な変換エンジンを切り替える
  * 単漢字変換
   - 候補が10個以上出るように
  * 予測機能
-  - 実はそんなに有効ではないかも
+    - 実はそんなに有効ではないかも
  * SocialIMEとかGoogleIMEとかを呼ぶ
  * まともな変換システムを自力で作る
 
@@ -40,5 +40,5 @@
    みたいにすると鎌倉の住所を入力しやすいIMEが出てくる
  * ヒントを出すだけだと既に色々あるかも
  * ヒントによって画像すら入れられるようにすると凄い
- * MacのIMEで画像を入力できる気がするナ
-   NSTextViewじゃなくてWebView(?)にすればよい
+ * MacのIMEで画像を入力できる気がする
+    - NSTextViewじゃなくてWebView(?)にすればよい
