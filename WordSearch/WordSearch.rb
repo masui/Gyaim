@@ -166,10 +166,10 @@ class WordSearch
   #
   # 学習辞書の扱い
   #
-  def study(word,yomi)
+  def study(word,yomi,newword=false)
     puts "study(#{word},#{yomi})"
     # すでに学習辞書に登録されている場合はユーザ辞書に登録してしまう
-    if @studydict.map { |e| e[1] } .index(word) then
+    if newword && @studydict.map { |e| e[1] } .index(word) then
       register(word,yomi)
     end
     @studydict.unshift([yomi,word])
