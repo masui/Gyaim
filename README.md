@@ -1,6 +1,6 @@
 # Gyaim
 
- *MacRubyで作ったMac用のIMEです。
+ * MacRubyで作ったMac用のIMEです。
  * 500行ぐらいのRubyでIMEができることを示すものです
  * 変換部分は超いい加減なので注意
   - 予測機能がありません
@@ -36,7 +36,7 @@
 ## 論文ネタ
 
  * IME用のヒントを与えるアプリケーション
-   <input type="text" hint="kamakura_address">
+    <input type="text" hint="kamakura_address">
    みたいにすると鎌倉の住所を入力しやすいIMEが出てくる
  * ヒントを出すだけだと既に色々あるかも
  * ヒントによって画像すら入れられるようにすると凄い
