@@ -166,12 +166,14 @@ class WordSearch
   #
   # 学習辞書の扱い
   #
-  def study(word,yomi,newword=false)
+  def study(word,yomi)
     puts "study(#{word},#{yomi})"
-    # すでに学習辞書に登録されている場合はユーザ辞書に登録してしまう
-    if newword && @studydict.map { |e| e[1] } .index(word) then
-      register(word,yomi)
+    if ! @dc[yomi].index([yomi,word]) then   # 固定辞書に入ってない
+      if @studydict.index([yomi,word]) then  # しかし学習辞書に入っている
+        register(word,yomi)                  # ならば登録してしまう
+      end
     end
+
     @studydict.unshift([yomi,word])
     @studydict = @studydict[0..1000] # 1000行に制限
   end
