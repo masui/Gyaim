@@ -168,9 +168,11 @@ class WordSearch
   #
   def study(word,yomi)
     puts "study(#{word},#{yomi})"
-    if ! @dc[yomi].index([yomi,word]) then   # 固定辞書に入ってない
-      if @studydict.index([yomi,word]) then  # しかし学習辞書に入っている
-        register(word,yomi)                  # ならば登録してしまう
+    if yomi.length > 1 then                    # (間違って変な単語を登録しないように)
+      if ! @dc[yomi].index([yomi,word]) then   # 固定辞書に入ってない
+        if @studydict.index([yomi,word]) then  # しかし学習辞書に入っている
+          register(word,yomi)                  # ならば登録してしまう
+        end
       end
     end
 
@@ -212,12 +214,10 @@ class WordSearch
   end
 
   def start
-    puts "loadstudy"
     @studydict = loadDict(studyDictFile)
   end
 
   def finish
-    puts "savestudy"
     saveDict(studyDictFile,@studydict)
   end
 
