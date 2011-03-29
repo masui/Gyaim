@@ -1,5 +1,10 @@
-buildandinstall: xcodebuild install
+buildandinstall: dictdir xcodebuild install
 
+#
+#
+#
+dictdir:
+	-mkdir ~/.gyaimdict
 #
 # 富豪辞書の一部から辞書キャッシュを作って変換に利用
 #
