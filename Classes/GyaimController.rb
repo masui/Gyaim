@@ -59,6 +59,7 @@ class GyaimController < IMKInputController
     @nthCand = 0
     @ws.searchmode = 0
     @selectedstr = nil
+    hideWindow
   end
 
   def converting
@@ -157,7 +158,6 @@ class GyaimController < IMKInputController
       handled = true
     end
 
-    showWindow
     return handled
   end
 
@@ -230,6 +230,7 @@ class GyaimController < IMKInputController
   end
 
   def showCands
+    showWindow
     #
     # 選択中の単語をキャレット位置にアンダーライン表示
     #
