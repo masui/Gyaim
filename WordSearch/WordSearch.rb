@@ -10,6 +10,8 @@
 #   DictCache.createCache(fugodic,localdic, ...)
 # dict["k"] 配列を返す
 
+require 'openssl'
+
 class DictCache
   def initialize
     @dict = {}
@@ -72,6 +74,31 @@ end
 class WordSearch
   attr :searchmode, true
 
+  #
+  # 単語の暗号化登録のために利用する暗号化/複号化ライブラリ
+  # ウノウラボから持ってきたもの
+  # http://labs.unoh.net/2007/05/ruby.html
+  # 
+  def encrypt(aaa, salt = 'salt')
+    puts "encrypt(#{aaa},#{salt})"
+    enc = OpenSSL::Cipher::Cipher.new('aes256')
+    enc.encrypt
+    enc.pkcs5_keyivgen(salt)
+    #((enc.update(aaa) + enc.final).unpack("H*")).to_s
+    ((enc.update(aaa) + enc.final).unpack("H*"))[0]
+  rescue
+    false
+  end
+
+  def decrypt(bbb, salt = 'salt')
+    dec = OpenSSL::Cipher::Cipher.new('aes256')
+    dec.decrypt
+    dec.pkcs5_keyivgen(salt)
+    (dec.update(Array.new([bbb]).pack("H*")) + dec.final)
+  rescue  
+    false
+  end
+
   def dictDir
     File.expand_path("~/.gyaimdict")
   end
@@ -129,6 +156,24 @@ class WordSearch
           end
         end
       }
+    elsif q.length > 1 && q =~ /^(.*)\?$/ then
+      # 個人登録辞書の中から暗号化された単語だけ抽出
+      pat = $1
+      @localdict.each { |entry|
+        yomi = entry[0]
+        word = entry[1]
+        if yomi == '?' then # 暗号化された単語は読みが「?」になってる
+          if !candfound[word] then
+            # decryptしたバイト列が漢字だとうまくいかない...★★修正必要
+            word = decrypt(word,pat)
+            if word then
+              @candidates << [word, yomi]
+              candfound[word] = true
+              break if @candidates.length > limit
+            end
+          end
+        end
+      }
     else
       # 普通に検索
       qq = q.gsub(/[\.\{\}\[\]\(\)]/){ '\\' + $& }
@@ -156,6 +201,7 @@ class WordSearch
   # ユーザ辞書登録
   #
   def register(word,yomi)
+    puts word.class
     puts "register(#{word},#{yomi})"
     if !@localdict.index([yomi,word]) then
       @localdict.unshift([yomi,word])

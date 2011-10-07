@@ -214,7 +214,11 @@ class GyaimController < IMKInputController
       # @client.insertText(word)
       @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
       if word == @selectedstr then
-        @ws.register(word,@inputPat)
+        if @inputPat =~ /^(.*)\?$/ then # 暗号化単語登録
+          @ws.register(@ws.encrypt(word,$1).to_s,'?')
+        else
+          @ws.register(word,@inputPat)
+        end
         @selectedstr = nil
       else
         c = @candidates[@nthCand]
