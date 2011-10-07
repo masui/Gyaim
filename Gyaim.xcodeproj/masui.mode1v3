@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>CEC104831334B15B00FDCC67</string>
+						<string>CEF84C8A1382417F00971C72</string>
 						<key>history</key>
 						<array>
-							<string>CE81461B13343800001B2BC4</string>
+							<string>CEC104831334B15B00FDCC67</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -318,7 +318,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
+									<integer>16</integer>
+									<integer>12</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -342,7 +343,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>562 122 838 708 0 0 1440 878 </string>
+						<string>310 128 838 708 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -370,7 +371,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CEC104801334B15B00FDCC67</string>
+										<string>CEF84C891382417F00971C72</string>
 										<key>history</key>
 										<array>
 											<string>CE05D9E8132E3AFA00D1FC7F</string>
@@ -383,7 +384,7 @@
 											<string>CE4CC702132F408400AB1DBE</string>
 											<string>CEBB72F3132F894C00854DF8</string>
 											<string>CE0A544713302A6F00F6433F</string>
-											<string>CE81461A13343800001B2BC4</string>
+											<string>CEC104801334B15B00FDCC67</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -397,7 +398,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {630, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>562 122 838 708 0 0 1440 878 </string>
+								<string>310 128 838 708 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -417,7 +418,7 @@
 								<key>Frame</key>
 								<string>{{0, 5}, {630, 662}}</string>
 								<key>RubberWindowFrame</key>
-								<string>562 122 838 708 0 0 1440 878 </string>
+								<string>310 128 838 708 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -441,9 +442,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>CEC104811334B15B00FDCC67</string>
+				<string>CEF84C7D1382413300971C72</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>CEC104821334B15B00FDCC67</string>
+				<string>CEF84C7E1382413300971C72</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -581,12 +582,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>CEA7E6F7132E113600EF7235</string>
 		<string>CE40FE281332278400248465</string>
 		<string>/Users/masui/Gyaim/Gyaim.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>562 122 838 708 0 0 1440 878 </string>
+	<string>310 128 838 708 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -663,7 +665,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>CEA7E6F7132E113600EF7235</string>
-				<string>CEC104841334B15B00FDCC67</string>
+				<string>CEF84C801382413300971C72</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -785,13 +787,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>CE41E17F133229EC006CD1C8</string>
+				<string>CEF84C811382413300971C72</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>CE41E180133229EC006CD1C8</string>
-				<string>CE41E181133229EC006CD1C8</string>
-				<string>CE41E182133229EC006CD1C8</string>
-				<string>CE41E183133229EC006CD1C8</string>
-				<string>CE41E184133229EC006CD1C8</string>
+				<string>CEF84C821382413300971C72</string>
+				<string>CEF84C831382413300971C72</string>
+				<string>CEF84C841382413300971C72</string>
+				<string>CEF84C851382413300971C72</string>
+				<string>CEF84C861382413300971C72</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>

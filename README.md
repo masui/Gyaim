@@ -15,7 +15,11 @@
 
  * [MacRuby](http://www.macruby.org/)のインストールが必要です
  * 多分SnowLeopardが必要です
- * "make small" または "make large" してからログアウトして再ログインすると
+ * コンパイルは↓で
+    * $ mkdir ~/.gyaimdict
+    * $ touch ~/.gyaimdict/dict2d
+    * $ make small または $ make large
+ * その後、ログアウトして再ログインすると
    「言語環境設定」からGyaimを選択できるようになります
  * PalmのIMEで利用してた「富豪辞書」を使っています
     * 自前の適当な辞書を使うことも可能です
