@@ -78,13 +78,14 @@ class WordSearch
   # 単語の暗号化登録のために利用する暗号化/複号化ライブラリ
   # ウノウラボから持ってきたもの
   # http://labs.unoh.net/2007/05/ruby.html
+  # decryptしても漢字に戻らない不具合あり
   # 
   def encrypt(aaa, salt = 'salt')
     puts "encrypt(#{aaa},#{salt})"
     enc = OpenSSL::Cipher::Cipher.new('aes256')
     enc.encrypt
     enc.pkcs5_keyivgen(salt)
-    #((enc.update(aaa) + enc.final).unpack("H*")).to_s
+    #((enc.update(aaa) + enc.final).unpack("H*")).to_s  # 何故か文字列への変換に失敗することがある...
     ((enc.update(aaa) + enc.final).unpack("H*"))[0]
   rescue
     false
@@ -156,8 +157,7 @@ class WordSearch
           end
         end
       }
-    elsif q.length > 1 && q =~ /^(.*)\?$/ then
-      # 個人登録辞書の中から暗号化された単語だけ抽出
+    elsif q.length > 1 && q =~ /^(.*)\?$/ then  # 個人辞書の中から暗号化された単語だけ抽出
       pat = $1
       @localdict.each { |entry|
         yomi = entry[0]
