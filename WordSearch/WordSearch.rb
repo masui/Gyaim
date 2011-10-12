@@ -260,6 +260,9 @@ class WordSearch
   end
 
   def start
+    # 変換ウィンドウが出るときにこれを読んでいるのだが、これを
+    # 実行すると変換が遅れて文字をとりこぼしてしまう。
+    # たいした処理をしてないのに何故だろうか?
     @studydict = loadDict(studyDictFile)
   end
 
