@@ -263,7 +263,9 @@ class WordSearch
     # 変換ウィンドウが出るときにこれを読んでいるのだが、これを
     # 実行すると変換が遅れて文字をとりこぼしてしまう。
     # たいした処理をしてないのに何故だろうか?
-    @studydict = loadDict(studyDictFile)
+    Thread.new do
+      @studydict = loadDict(studyDictFile)
+    end
   end
 
   def finish
