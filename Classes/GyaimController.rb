@@ -223,10 +223,14 @@ class GyaimController < IMKInputController
       else
         c = @candidates[@nthCand]
         if c.class == Array then
-          @ws.study(c[0],c[1])
+          if c[1] != 'ds' && c[1] != '?' then
+            @ws.study(c[0],c[1])
+          end
         else
           # 読みが未登録 = ユーザ辞書に登録されていない
-          @ws.study(word,@inputPat)
+          if @inputPat != 'ds' && @inputPat != '?' then
+            @ws.study(word,@inputPat)
+          end
         end
       end
     end
