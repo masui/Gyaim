@@ -157,6 +157,8 @@ class WordSearch
           end
         end
       }
+    elsif q == "ds" then # TimeStamp or DateStamp(?)
+      @candidates << Time.now.strftime('%Y/%m/%d %H:%M:%S')
     elsif q.length > 1 && q =~ /^(.*)\?$/ then  # 個人辞書の中から暗号化された単語だけ抽出
       pat = $1
       @localdict.each { |entry|
