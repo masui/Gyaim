@@ -244,7 +244,7 @@ $s = s
     }
     r2.length == 0 ? r1 : r2
   end
-  
+
   def hiragana2roma(s)
 $s = s
     r1 = krexpand('',s,false,[],@hkr)
@@ -253,7 +253,7 @@ $s = s
     }
     r2.length == 0 ? r1 : r2
   end
-  
+
   def krexpand(a,b,t,result,kr)
 #    puts "krexpand(#{a}, #{b}, #{t})"
     if t then # 「ッ」の処理
@@ -287,7 +287,7 @@ end
       end
       return result
     end
-    
+
     if b == '' then
       a.gsub!(/n'([bcdfghjklmnpqrstvwxz])/, "n\\1")
       a.sub!(/n'$/,'n')

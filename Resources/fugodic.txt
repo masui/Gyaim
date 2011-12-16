@@ -10384,7 +10384,7 @@ smile	(
 sp	　
 space	　
 space	□
-space	
+space
 sq	□
 sqrt	√
 square	■

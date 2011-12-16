@@ -164,7 +164,7 @@ class GyaimController < IMKInputController
   def wordpart(e) # 候補が[単語, 読み]のような配列で返ってくるとき単語部分だけ取得
     e.class == String ? e : e[0]
   end
-  
+
   def delete(a,s)
     a.find_all { |e|
       wordpart(e) != s
@@ -206,7 +206,7 @@ class GyaimController < IMKInputController
     @nthCand = 0
     showCands
   end
-  
+
   def fix
     if @candidates.length > @nthCand then
       word = wordpart(@candidates[@nthCand])

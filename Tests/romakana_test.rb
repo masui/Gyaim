@@ -10,10 +10,10 @@ class RomakanaTest < Test::Unit::TestCase
   def setup
     @rk = Romakana.new
   end
-  
+
   def teardown
   end
-  
+
   def test_simple
     assert "masui".roma2hiragana, "ますい"
     assert "komatta".roma2hiragana, "こまった"

@@ -27,17 +27,17 @@ class CandWindow < NSWindow
     screenFrame = NSScreen.mainScreen.frame
     windowFrame = self.frame
 
-    # grab the current global mouse location; we could just as easily get the mouse location 
+    # grab the current global mouse location; we could just as easily get the mouse location
     # in the same way as we do in -mouseDown:
     # currentLocation = [self convertBaseToScreen:[self mouseLocationOutsideOfEventStream]];
     currentLocation = self.convertBaseToScreen(event.locationInWindow)
     newOrigin = NSPoint.new(currentLocation.x - @initialLocation.x, currentLocation.y - @initialLocation.y)
-    
+
     # Don't let window get dragged up under the menu bar
     if newOrigin.y+windowFrame.size.height > screenFrame.origin.y+screenFrame.size.height then
       newOrigin.y=screenFrame.origin.y + (screenFrame.size.height-windowFrame.size.height)
     end
-    
+
     # go ahead and move the window to the new location
     self.setFrameOrigin(newOrigin)
   end
