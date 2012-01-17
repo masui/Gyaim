@@ -10,7 +10,7 @@
 #   DictCache.createCache(fugodic,localdic, ...)
 # dict["k"] 配列を返す
 
-require 'openssl'
+require 'Crypt'
 
 class DictCache
   def initialize
@@ -73,32 +73,6 @@ end
 
 class WordSearch
   attr :searchmode, true
-
-  #
-  # 単語の暗号化登録のために利用する暗号化/複号化ライブラリ
-  # ウノウラボから持ってきたもの
-  # http://labs.unoh.net/2007/05/ruby.html
-  # decryptしても漢字に戻らない不具合あり
-  # 
-  def encrypt(aaa, salt = 'salt')
-    puts "encrypt(#{aaa},#{salt})"
-    enc = OpenSSL::Cipher::Cipher.new('aes256')
-    enc.encrypt
-    enc.pkcs5_keyivgen(salt)
-    #((enc.update(aaa) + enc.final).unpack("H*")).to_s  # 何故か文字列への変換に失敗することがある...
-    ((enc.update(aaa) + enc.final).unpack("H*"))[0]
-  rescue
-    false
-  end
-
-  def decrypt(bbb, salt = 'salt')
-    dec = OpenSSL::Cipher::Cipher.new('aes256')
-    dec.decrypt
-    dec.pkcs5_keyivgen(salt)
-    (dec.update(Array.new([bbb]).pack("H*")) + dec.final)
-  rescue  
-    false
-  end
 
   def dictDir
     File.expand_path("~/.gyaimdict")
@@ -167,7 +141,7 @@ class WordSearch
         if yomi == '?' then # 暗号化された単語は読みが「?」になってる
           if !candfound[word] then
             # decryptしたバイト列が漢字だとうまくいかない...★★修正必要
-            word = decrypt(word,pat)
+            word = Crypt.decrypt(word,pat)
             if word then
               @candidates << [word, yomi]
               candfound[word] = true

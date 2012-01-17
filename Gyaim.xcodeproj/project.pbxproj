@@ -53,6 +53,7 @@
 		CE4CC6F2132F3F7000AB1DBE /* AppDelegate.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */; };
 		CE58571D132F91E600C8C83E /* Romakana.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE58571C132F91E600C8C83E /* Romakana.rb */; };
 		CE7465C6132ECF9000873646 /* CandView.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE7465C5132ECF9000873646 /* CandView.rb */; };
+		CE7908F714C5176F0022BB86 /* Crypt.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE7908F614C5176F0022BB86 /* Crypt.rb */; };
 		CEA7E6FD132E118400EF7235 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA7E6FC132E118400EF7235 /* InputMethodKit.framework */; };
 		CEA7E705132E11C800EF7235 /* GyaimController.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEA7E704132E11C800EF7235 /* GyaimController.rb */; };
 		CEB9E697132ECDB900F2ABDE /* CandWindow.rb in Resources */ = {isa = PBXBuildFile; fileRef = CEB9E696132ECDB900F2ABDE /* CandWindow.rb */; };
@@ -91,6 +92,7 @@
 		CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = AppDelegate.rb; path = Classes/AppDelegate.rb; sourceTree = "<group>"; };
 		CE58571C132F91E600C8C83E /* Romakana.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Romakana.rb; path = Romakana/Romakana.rb; sourceTree = "<group>"; };
 		CE7465C5132ECF9000873646 /* CandView.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = CandView.rb; path = Classes/CandView.rb; sourceTree = "<group>"; };
+		CE7908F614C5176F0022BB86 /* Crypt.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Crypt.rb; path = Classes/Crypt.rb; sourceTree = "<group>"; };
 		CEA7E6FC132E118400EF7235 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
 		CEA7E704132E11C800EF7235 /* GyaimController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = GyaimController.rb; path = Classes/GyaimController.rb; sourceTree = "<group>"; };
 		CEB9E696132ECDB900F2ABDE /* CandWindow.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = CandWindow.rb; path = Classes/CandWindow.rb; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				CEA7E704132E11C800EF7235 /* GyaimController.rb */,
 				CEB9E696132ECDB900F2ABDE /* CandWindow.rb */,
+				CE7908F614C5176F0022BB86 /* Crypt.rb */,
 				CE7465C5132ECF9000873646 /* CandView.rb */,
 				CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */,
 				CEBB72ED132F883800854DF8 /* WordSearch.rb */,
@@ -273,6 +276,7 @@
 				CEBB72EE132F883800854DF8 /* WordSearch.rb in Resources */,
 				CE58571D132F91E600C8C83E /* Romakana.rb in Resources */,
 				CEC9980B1330F0570003090F /* fugodic.txt in Resources */,
+				CE7908F714C5176F0022BB86 /* Crypt.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>CEFC5EED146ECF8F00903E31</string>
+						<string>CE79090614C51AEB0022BB86</string>
 						<key>history</key>
 						<array>
-							<string>CEF84C8A1382417F00971C72</string>
+							<string>CEFC5EED146ECF8F00903E31</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -316,7 +316,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>4</integer>
+									<integer>5</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
@@ -341,7 +341,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>310 128 838 708 0 0 1440 878 </string>
+						<string>251 144 838 708 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -357,7 +357,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>CandWindow.rb</string>
+								<string>Crypt.rb</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -365,11 +365,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>CandWindow.rb</string>
+										<string>Crypt.rb</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CEFC5EEA146ECF8F00903E31</string>
+										<string>CE79090314C51AEB0022BB86</string>
 										<key>history</key>
 										<array>
 											<string>CE05D9E8132E3AFA00D1FC7F</string>
@@ -377,12 +377,13 @@
 											<string>CEFDEE8A132ECBDB005C9484</string>
 											<string>CEFDEE8B132ECBDB005C9484</string>
 											<string>CE4CC702132F408400AB1DBE</string>
-											<string>CEFC5EE4146ECF8F00903E31</string>
 											<string>CEFC5EE5146ECF8F00903E31</string>
 											<string>CEFC5EE6146ECF8F00903E31</string>
 											<string>CEFC5EE7146ECF8F00903E31</string>
 											<string>CEFC5EE8146ECF8F00903E31</string>
-											<string>CEFC5EE9146ECF8F00903E31</string>
+											<string>CE79090014C51AEB0022BB86</string>
+											<string>CE79090114C51AEB0022BB86</string>
+											<string>CE79090214C51AEB0022BB86</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -394,14 +395,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {630, 534}}</string>
+								<string>{{0, 0}, {630, 530}}</string>
 								<key>RubberWindowFrame</key>
-								<string>310 128 838 708 0 0 1440 878 </string>
+								<string>251 144 838 708 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>534pt</string>
+							<string>530pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -414,14 +415,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 539}, {630, 128}}</string>
+								<string>{{0, 535}, {630, 132}}</string>
 								<key>RubberWindowFrame</key>
-								<string>310 128 838 708 0 0 1440 878 </string>
+								<string>251 144 838 708 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>128pt</string>
+							<string>132pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -440,9 +441,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>CEFC5EEB146ECF8F00903E31</string>
+				<string>CE79090414C51AEB0022BB86</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>CEFC5EEC146ECF8F00903E31</string>
+				<string>CE79090514C51AEB0022BB86</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -586,7 +587,7 @@
 		<string>/Users/masui/Gyaim/Gyaim.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>310 128 838 708 0 0 1440 878 </string>
+	<string>251 144 838 708 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -663,7 +664,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>CEA7E6F7132E113600EF7235</string>
-				<string>CEFC5EEE146ECF8F00903E31</string>
+				<string>CE79090714C51AEB0022BB86</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -785,13 +786,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>CEFC5EEF146ECF8F00903E31</string>
+				<string>CE79090814C51AEB0022BB86</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>CEFC5EF0146ECF8F00903E31</string>
-				<string>CEFC5EF1146ECF8F00903E31</string>
-				<string>CEFC5EF2146ECF8F00903E31</string>
-				<string>CEFC5EF3146ECF8F00903E31</string>
-				<string>CEFC5EF4146ECF8F00903E31</string>
+				<string>CE79090914C51AEB0022BB86</string>
+				<string>CE79090A14C51AEB0022BB86</string>
+				<string>CE79090B14C51AEB0022BB86</string>
+				<string>CE79090C14C51AEB0022BB86</string>
+				<string>CE79090D14C51AEB0022BB86</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>

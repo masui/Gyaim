@@ -11,6 +11,7 @@ framework 'InputMethodKit'
 
 require 'WordSearch'
 require 'Romakana'
+require 'Crypt'
 
 class GyaimController < IMKInputController
   attr_accessor :candwin
@@ -215,7 +216,7 @@ class GyaimController < IMKInputController
       @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
       if word == @selectedstr then
         if @inputPat =~ /^(.*)\?$/ then # 暗号化単語登録
-          @ws.register(@ws.encrypt(word,$1).to_s,'?')
+          @ws.register(Crypt.encrypt(word,$1).to_s,'?')
         else
           @ws.register(word,@inputPat)
         end

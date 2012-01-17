@@ -3,5 +3,5 @@
 build
 tmp
 .DS_Store
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
+masui.mode1v3
+masui.pbxuser
