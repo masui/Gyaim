@@ -40,8 +40,8 @@ class GyaimController < IMKInputController
   # 入力システムがアクティブになると呼ばれる
   #
   def activateServer(sender)
-    showWindow
     @ws.start
+    showWindow
   end
 
   #
