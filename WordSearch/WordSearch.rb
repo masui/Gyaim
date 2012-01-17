@@ -114,7 +114,7 @@ class WordSearch
     @candidates = []
 
     if q.length > 1 && q.sub!(/\.$/,'') then
-      # Google Suggestを検索
+      # パタンの最後にピリオドが入力されたらGoogle Suggestを検索
       require 'net/http'
       require 'nkf'
       registered = {}
@@ -155,6 +155,7 @@ class WordSearch
       qq = q.gsub(/[\.\{\}\[\]\(\)]/){ '\\' + $& }
       pat = Regexp.new(@searchmode > 0 ? "^#{qq}$" : "^#{qq}")
 
+      # 超単純な辞書検索
       (@studydict + @localdict + @dc[q]).each { |entry|
         yomi = entry[0]
         word = entry[1]
