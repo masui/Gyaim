@@ -10,7 +10,7 @@ class WordSearchTest < Test::Unit::TestCase
   def setup
     @ws = WordSearch.new('Resources/dict.txt')
   end
-  
+
   def teardown
   end
 
@@ -23,7 +23,7 @@ class WordSearchTest < Test::Unit::TestCase
     }
     assert_equal(found[word],registered)
   end
-  
+
   def test_true
     check('masui','増井',true)
     check('mazui','増井',nil)

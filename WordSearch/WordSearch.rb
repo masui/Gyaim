@@ -79,7 +79,7 @@ class WordSearch
   # ウノウラボから持ってきたもの
   # http://labs.unoh.net/2007/05/ruby.html
   # decryptしても漢字に戻らない不具合あり
-  # 
+  #
   def encrypt(aaa, salt = 'salt')
     puts "encrypt(#{aaa},#{salt})"
     enc = OpenSSL::Cipher::Cipher.new('aes256')
@@ -96,7 +96,7 @@ class WordSearch
     dec.decrypt
     dec.pkcs5_keyivgen(salt)
     (dec.update(Array.new([bbb]).pack("H*")) + dec.final)
-  rescue  
+  rescue
     false
   end
 
@@ -125,7 +125,7 @@ class WordSearch
     end
 
     # 個人辞書を読出し
-    @localdict = loadDict(localDictFile) 
+    @localdict = loadDict(localDictFile)
 
     # 学習辞書を読出し
     @studydict = loadDict(studyDictFile)
@@ -194,7 +194,7 @@ class WordSearch
       }
     end
   end
-  
+
   def candidates
     @candidates
   end
