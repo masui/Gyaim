@@ -1,75 +1,13 @@
 # -*- coding: utf-8 -*-
+#
 # WordSearch.rb
 # Gyaim
 #
 # Created by Toshiyuki Masui on 2011/3/15.
 # Copyright 2011 Pitecan Systems. All rights reserved.
 
-# dict = DictCache.new
-# DictCache.create(*dictfiles)
-#   DictCache.createCache(fugodic,localdic, ...)
-# dict["k"] 配列を返す
-
 require 'Crypt'
-
-class DictCache
-  def initialize
-    @dict = {}
-  end
-
-  def DictCache.charCode(s)
-    sprintf("%02x",s.each_byte.to_a[0])
-  end
-
-  def DictCache.cacheDictDir
-    # NSBundle.mainBundle.resourcePath
-    # "/tmp"
-    File.expand_path("~/.gyaimdict")
-  end
-
-  def DictCache.dictMarshalFile(code)
-    "#{cacheDictDir}/dict#{code}"
-  end
-
-  def [](s)
-    code =  DictCache.charCode(s)
-    if @dict[code].nil? then
-      marshal = DictCache.dictMarshalFile(code)
-      if File.exist?(marshal) then
-        File.open(marshal){ |f|
-          @dict[code] = Marshal.load(f)
-        }
-      end
-    end
-    @dict[code]
-  end
-
-  def DictCache.createCache(*dictfiles)
-    @dict = {}
-    dictfiles.flatten.each { |dictfile|
-      File.open(dictfile){ |f|
-        f.each { |line|
-          next if line =~ /^#/
-          next if line =~ /^\s*$/
-          line.chomp!
-          (yomi,word) = line.split(/\s+/)
-          if yomi && word then
-            if @dict[charCode(yomi)].nil? then
-              @dict[charCode(yomi)] = []
-            end
-            @dict[charCode(yomi)] << [yomi,word]
-          end
-        }
-      }
-    }
-    @dict.each { |code,dic|
-      File.open(dictMarshalFile(code),"w"){ |f|
-        Marshal.dump(dic,f)
-      }
-    }
-  end
-end
-
+require 'ConnectionDict'
 
 class WordSearch
   attr :searchmode, true
@@ -88,15 +26,12 @@ class WordSearch
 
   # dict = NSBundle.mainBundle.pathForResource("dict", ofType:"txt")
   # dict = "../Resources/dict.txt"
-  def initialize(*dictfiles)
+  def initialize(dictfile)
     @searchmode = 0
     Dir.mkdir(dictDir) unless File.exist?(dictDir)
 
     # 固定辞書初期化
-    @dc = DictCache.new
-    if !@dc["kanji"] then
-      DictCache.createCache(dictfiles)
-    end
+    @cd = ConnectionDict.new(dictfile)
 
     # 個人辞書を読出し
     @localdict = loadDict(localDictFile) 
@@ -156,7 +91,7 @@ class WordSearch
       pat = Regexp.new(@searchmode > 0 ? "^#{qq}$" : "^#{qq}")
 
       # 超単純な辞書検索
-      (@studydict + @localdict + @dc[q]).each { |entry|
+      (@studydict + @localdict).each { |entry|
         yomi = entry[0]
         word = entry[1]
         if pat.match(yomi) then
@@ -165,6 +100,17 @@ class WordSearch
             candfound[word] = true
             break if @candidates.length > limit
           end
+        end
+      }
+      # 接続辞書検索
+      @cd.search(q){ |word,pat,outc|
+        next if word =~ /\*$/
+        word.gsub!(/\*/,'')
+        if !candfound[word] then
+          # puts "addCandidate(#{word},#{pat},#{outc})"
+          @candidates << [word, pat]
+          candfound[word] = true
+          break if @candidates.length > limit
         end
       }
     end
@@ -191,16 +137,16 @@ class WordSearch
   #
   def study(word,yomi)
     puts "study(#{word},#{yomi})"
-    if yomi.length > 1 then                    # (間違って変な単語を登録しないように)
-      if ! @dc[yomi].index([yomi,word]) then   # 固定辞書に入ってない
-        if @studydict.index([yomi,word]) then  # しかし学習辞書に入っている
-          register(word,yomi)                  # ならば登録してしまう
-        end
-      end
-    end
+#    if yomi.length > 1 then                    # (間違って変な単語を登録しないように)
+#      if ! @dc[yomi].index([yomi,word]) then   # 固定辞書に入ってない
+#        if @studydict.index([yomi,word]) then  # しかし学習辞書に入っている
+#          register(word,yomi)                  # ならば登録してしまう
+#        end
+#      end
+#    end
 
-    @studydict.unshift([yomi,word])
-    @studydict = @studydict[0..1000] # 1000行に制限
+#    @studydict.unshift([yomi,word])
+#    @studydict = @studydict[0..1000] # 1000行に制限
   end
 
   def loadDict(dictfile)
