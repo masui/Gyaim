@@ -9,7 +9,12 @@ dictdir:
 xcodebuild:
 	xcodebuild -target Gyaim -configuration Debug
 install:
+	macruby_deploy --embed build/Debug/Gyaim.app
 	cp -r build/Debug/Gyaim.app ~/Library/Input\ Methods
+
+dmg:
+	/bin/rm -f Gyaim.dmg
+	hdiutil create -srcfolder build/Debug/Gyaim.app -volname Gyaim Gyaim.dmg
 
 clean:
 	/bin/rm -f *~ */*~
