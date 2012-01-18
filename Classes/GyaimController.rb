@@ -21,7 +21,7 @@ class GyaimController < IMKInputController
   @@ws = nil
 
   def initWithServer(server, delegate:d, client:c)
-    puts "initWithServer===============@@ws = #{@@ws}"
+    # puts "initWithServer===============@@ws = #{@@ws}"
     # Log.log "initWithServer delegate=#{d}, client="#{c}"
     @client = c   # Lexierraではこれをnilにしてた。何故?
 

@@ -134,7 +134,7 @@ class WordSearch
   # 学習辞書の扱い
   #
   def study(word,yomi)
-    puts "study(#{word},#{yomi})"
+    # puts "study(#{word},#{yomi})"
     if yomi.length > 1 then                    # (間違って変な単語を登録しないように)
       registered = false
       @cd.search(yomi,@searchmode){ |w,p,outc|
