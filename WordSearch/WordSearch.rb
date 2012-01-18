@@ -107,7 +107,6 @@ class WordSearch
         next if word =~ /\*$/
         word.gsub!(/\*/,'')
         if !candfound[word] then
-          # puts "addCandidate(#{word},#{pat},#{outc})"
           @candidates << [word, pat]
           candfound[word] = true
           break if @candidates.length > limit
@@ -124,7 +123,6 @@ class WordSearch
   # ユーザ辞書登録
   #
   def register(word,yomi)
-    puts word.class
     puts "register(#{word},#{yomi})"
     if !@localdict.index([yomi,word]) then
       @localdict.unshift([yomi,word])
@@ -137,16 +135,26 @@ class WordSearch
   #
   def study(word,yomi)
     puts "study(#{word},#{yomi})"
-#    if yomi.length > 1 then                    # (間違って変な単語を登録しないように)
-#      if ! @dc[yomi].index([yomi,word]) then   # 固定辞書に入ってない
-#        if @studydict.index([yomi,word]) then  # しかし学習辞書に入っている
-#          register(word,yomi)                  # ならば登録してしまう
-#        end
-#      end
-#    end
+    if yomi.length > 1 then                    # (間違って変な単語を登録しないように)
+      registered = false
+      @cd.search(yomi){ |w,p,outc|
+        next if w =~ /\*$/
+        w.gsub!(/\*/,'')
+        if w == word
+          registered = true
+          break
+        end
+      }
+      if !registered then
+        #      if ! @dc[yomi].index([yomi,word]) then   # 固定辞書に入ってない
+        if @studydict.index([yomi,word]) then  # しかし学習辞書に入っている
+          register(word,yomi)                  # ならば登録してしまう
+        end
+      end
+    end
 
-#    @studydict.unshift([yomi,word])
-#    @studydict = @studydict[0..1000] # 1000行に制限
+    @studydict.unshift([yomi,word])
+    @studydict = @studydict[0..1000] # 1000行に制限
   end
 
   def loadDict(dictfile)
