@@ -9,7 +9,7 @@ class Crypt
   # http://labs.unoh.net/2007/05/ruby.html
   # decryptしても漢字に戻らない不具合あり
   # 
-  def Crypt._encrypt(aaa, salt = 'salt')
+  def Crypt.encrypt(aaa, salt = 'salt')
     puts "encrypt(#{aaa},#{salt})"
     enc = OpenSSL::Cipher::Cipher.new('aes256')
     enc.encrypt
@@ -20,7 +20,7 @@ class Crypt
     false
   end
 
-  def Crypt._decrypt(bbb, salt = 'salt')
+  def Crypt.decrypt(bbb, salt = 'salt')
     dec = OpenSSL::Cipher::Cipher.new('aes256')
     dec.decrypt
     dec.pkcs5_keyivgen(salt)
