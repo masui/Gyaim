@@ -79,7 +79,8 @@ class ConnectionDict
     }
   end
 
-  def search(pat,&block)
+  def search(pat,searchmode,&block)
+    @searchmode = searchmode
     @candidates = []
     generateCand(nil, pat, "", "", &block)
   end
@@ -92,7 +93,9 @@ class ConnectionDict
       if pat == @dict[d].pat then # 完全一致
         block.call(foundword+@dict[d].word, foundpat+@dict[d].pat, @dict[d].outConnection)
       elsif @dict[d].pat.index(pat) == 0 # 先頭一致
-        block.call(foundword+@dict[d].word, foundpat+@dict[d].pat, @dict[d].outConnection)
+        if @searchmode == 0 then
+          block.call(foundword+@dict[d].word, foundpat+@dict[d].pat, @dict[d].outConnection)
+        end
       elsif pat.index(@dict[d].pat) == 0 # connectionがあるかも
         restpat = pat[@dict[d].pat.length,pat.length]
         generateCand(@dict[d].outConnection, restpat, foundword+@dict[d].word, foundpat+@dict[d].pat, &block)

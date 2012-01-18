@@ -103,7 +103,7 @@ class WordSearch
         end
       }
       # 接続辞書検索
-      @cd.search(q){ |word,pat,outc|
+      @cd.search(q,@searchmode){ |word,pat,outc|
         next if word =~ /\*$/
         word.gsub!(/\*/,'')
         if !candfound[word] then
@@ -137,7 +137,7 @@ class WordSearch
     puts "study(#{word},#{yomi})"
     if yomi.length > 1 then                    # (間違って変な単語を登録しないように)
       registered = false
-      @cd.search(yomi){ |w,p,outc|
+      @cd.search(yomi,@searchmode){ |w,p,outc|
         next if w =~ /\*$/
         w.gsub!(/\*/,'')
         if w == word
