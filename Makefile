@@ -11,10 +11,14 @@ xcodebuild:
 install:
 	macruby_deploy --embed build/Debug/Gyaim.app
 	cp -r build/Debug/Gyaim.app ~/Library/Input\ Methods
+#	macruby_deploy --no-stdlib --stdlib openssl --stdlib net --stdlib nkf --embed build/Debug/Gyaim.app
 
 dmg:
 	/bin/rm -f Gyaim.dmg
 	hdiutil create -srcfolder build/Debug/Gyaim.app -volname Gyaim Gyaim.dmg
+
+publish: dmg
+	scp Gyaim.dmg pitecan.com:/www/www.pitecan.com/tmp
 
 clean:
 	/bin/rm -f *~ */*~

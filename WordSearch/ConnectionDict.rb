@@ -44,10 +44,6 @@ class ConnectionDict
     #
     # 先頭読みが同じ単語のリスト
     #
-    #(0..0x100).each { |i|
-    #  @keyLink[i] = nil
-    #}
-    puts "Dict.length = #{@dict.length}"
     cur = []
     @dict.each_with_index { |entry,i|
       next if entry.word =~ /^\*/
@@ -87,7 +83,7 @@ class ConnectionDict
   
   def generateCand(connection, pat, foundword, foundpat, &block)
     # これまでマッチした文字列がfoundword,foundpatに入っている
-    # d = (connection ? @connectionLink[connection] : @keyLink[pat[0]])
+    # d = (connection ? @connectionLink[connection] : @keyLink[pat[0]]) <- Ruby1.8
     d = (connection ? @connectionLink[connection] : @keyLink[pat.ord])
     while d do
       if pat == @dict[d].pat then # 完全一致
