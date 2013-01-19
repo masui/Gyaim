@@ -51,6 +51,7 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		CE06B22C14C5974700B8174D /* ConnectionDict.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE06B22B14C5974700B8174D /* ConnectionDict.rb */; };
 		CE06B23014C59AEB00B8174D /* dict.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE06B22F14C59AEB00B8174D /* dict.txt */; };
+		CE1435DB158888040017B176 /* PNG.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE1435DA158888040017B176 /* PNG.rb */; };
 		CE2F8D0B132ED116006FAB89 /* icon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = CE2F8D0A132ED116006FAB89 /* icon.tiff */; };
 		CE4CC6F2132F3F7000AB1DBE /* AppDelegate.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */; };
 		CE58571D132F91E600C8C83E /* Romakana.rb in Resources */ = {isa = PBXBuildFile; fileRef = CE58571C132F91E600C8C83E /* Romakana.rb */; };
@@ -92,6 +93,7 @@
 		8D1107320486CEB800E47090 /* Gyaim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gyaim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE06B22B14C5974700B8174D /* ConnectionDict.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = ConnectionDict.rb; path = WordSearch/ConnectionDict.rb; sourceTree = "<group>"; };
 		CE06B22F14C59AEB00B8174D /* dict.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dict.txt; path = Resources/dict.txt; sourceTree = "<group>"; };
+		CE1435DA158888040017B176 /* PNG.rb */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.ruby; name = PNG.rb; path = Classes/PNG.rb; sourceTree = "<group>"; };
 		CE2F8D0A132ED116006FAB89 /* icon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = icon.tiff; path = Resources/icon.tiff; sourceTree = "<group>"; };
 		CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = AppDelegate.rb; path = Classes/AppDelegate.rb; sourceTree = "<group>"; };
 		CE58571C132F91E600C8C83E /* Romakana.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = Romakana.rb; path = Romakana/Romakana.rb; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				CE4CC6F1132F3F7000AB1DBE /* AppDelegate.rb */,
 				CEBB72ED132F883800854DF8 /* WordSearch.rb */,
 				CE06B22B14C5974700B8174D /* ConnectionDict.rb */,
+				CE1435DA158888040017B176 /* PNG.rb */,
 				CE58571C132F91E600C8C83E /* Romakana.rb */,
 			);
 			name = Classes;
@@ -285,6 +288,7 @@
 				CE7908F714C5176F0022BB86 /* Crypt.rb in Resources */,
 				CE06B22C14C5974700B8174D /* ConnectionDict.rb in Resources */,
 				CE06B23014C59AEB00B8174D /* dict.txt in Resources */,
+				CE1435DB158888040017B176 /* PNG.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

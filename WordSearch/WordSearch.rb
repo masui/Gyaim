@@ -8,6 +8,11 @@
 
 require 'Crypt'
 require 'ConnectionDict'
+require 'PNG'
+
+require 'net/http'
+require 'json'
+require 'digest/md5'
 
 class WordSearch
   attr :searchmode, true
@@ -16,12 +21,69 @@ class WordSearch
     File.expand_path("~/.gyaimdict")
   end
 
+  def cacheDir
+    "#{dictDir}/cacheimages"
+  end
+
+  def imageDir
+    "#{dictDir}/images"
+  end
+
   def localDictFile
     "#{dictDir}/localdict.txt"
   end
 
   def studyDictFile
     "#{dictDir}/studydict.txt"
+  end
+
+  def downloadImage(url)
+    downloaded = {}
+    marshalfile = "#{cacheDir}/downloaded"
+    if File.exist?(marshalfile) then
+      downloaded = Marshal.load(File.read(marshalfile))
+    end
+    if !downloaded[url] then
+      begin
+        system "/opt/local/bin/wget #{url} -O #{cacheDir}/tmpimage > /dev/null >& /dev/null"
+        system "sips -s format png #{cacheDir}/tmpimage --resampleHeight 100 --out #{cacheDir}/tmpimage.png > /dev/null >& /dev/null"
+        # system "sips --resampleHeight 50 #{cacheDir}/tmpimage.png > /dev/null >& /dev/null"
+        imagedata = File.read("#{cacheDir}/tmpimage.png")
+        id = Digest::MD5.hexdigest(imagedata)
+        system "/bin/mv #{cacheDir}/tmpimage.png #{cacheDir}/#{id}.png"
+        system "/bin/cp #{cacheDir}/#{id}.png #{cacheDir}/#{id}s.png"
+        system "/usr/bin/sips --resampleHeight 20 #{cacheDir}/#{id}s.png > /dev/null >& /dev/null"
+        downloaded[url] = id
+      rescue
+        res = false
+      end
+    end
+    File.open(marshalfile,"w"){ |f|
+      f.print Marshal.dump(downloaded)
+    }
+    downloaded[url]
+  end
+  
+  #
+  # Google検索
+  #
+  def searchGoogleImages(q)
+    ids = []
+    server = 'ajax.googleapis.com'
+    command = "/ajax/services/search/images?q=#{q}&v=1.0&rsz=large&start=1"
+    Net::HTTP.start(server, 80) {|http|
+      response = http.get(command)
+      json = JSON.parse(response.body)
+      images = json['responseData']['results']
+      images.each { |image|
+        url = image['url']
+        if id = downloadImage(url) then
+          ids << id
+        end
+      }
+    }
+    puts ids
+    ids
   end
 
   # dict = NSBundle.mainBundle.pathForResource("dict", ofType:"txt")
@@ -34,7 +96,8 @@ class WordSearch
     @cd = ConnectionDict.new(dictfile)
 
     # 個人辞書を読出し
-    @localdict = loadDict(localDictFile) 
+    @localdict = loadDict(localDictFile)
+    @localdicttime = File.mtime(localDictFile)
 
     # 学習辞書を読出し
     @studydict = loadDict(studyDictFile)
@@ -45,6 +108,11 @@ class WordSearch
 
     return if q.nil? || q == ''
 
+    # 別システムによりlocalDictが更新されたときは読み直す
+    if File.mtime(localDictFile) > @localdicttime then
+      @localdict = loadDict(localDictFile)
+    end
+
     candfound = {}
     @candidates = []
 
@@ -54,17 +122,62 @@ class WordSearch
       require 'nkf'
       registered = {}
       words = []
-      Net::HTTP.start('google.co.jp', 80) {|http|
-        response = http.get("/complete/search?output=toolbar&hl=ja&q=#{q}")
-        s = response.body.to_s
-        s = NKF.nkf('-w',s)
-        while s.sub!(/data="([^"]*)"\/>/,'') do
-          word = $1.split[0]
-          if !candfound[word] then
-            candfound[word] = 1
-            @candidates << word
+
+      # Google Suggest API ... 何度も使ってると拒否られるようになった
+      #Net::HTTP.start('google.co.jp', 80) {|http|
+      #  response = http.get("/complete/search?output=toolbar&hl=ja&q=#{q}",header)
+      #  s = response.body.to_s
+      #  s = NKF.nkf('-w',s)
+      #  while s.sub!(/data="([^"]*)"\/>/,'') do
+      #    word = $1.split[0]
+      #    if !candfound[word] then
+      #      candfound[word] = 1
+      #      @candidates << word
+      #    end
+      #  end
+      #}
+
+      require 'json'
+
+      Net::HTTP.start('google.com', 80) {|http|
+        response = http.get("/transliterate?langpair=ja-Hira|ja&text=#{q.roma2hiragana}")
+        JSON.parse(response.body)[0][1].each { |candword|
+        # JSON.parse(response.body)[0]['hws'].each { |candword| # 何故か一時的にこういう仕様になってたが戻った (2013/01/18)
+          if !candfound[candword] then
+            candfound[candword] = 1
+            @candidates << candword
           end
-        end
+        }
+      }
+    elsif q =~ /^(.*)\#$/ then
+      #
+      # 色指定
+      #
+      color = $1
+      if color =~ /^([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])$/ then
+        r = $1.hex
+        g = $2.hex
+        b = $3.hex
+        data = [[[r,g,b]] * 40] * 40
+        pnglarge = PNG.png(data)
+        data = [[[r,g,b]] * 20] * 20
+        pngsmall = PNG.png(data)
+        id = Digest::MD5.hexdigest(pnglarge)
+        File.open("#{imageDir}/#{id}.png","w"){ |f|
+          f.print pnglarge
+        }
+        File.open("#{imageDir}/#{id}s.png","w"){ |f|
+          f.print pngsmall
+        }
+        @candidates << id
+      end
+    elsif q =~ /^(.+)!$/ then
+      #
+      # Google画像検索
+      #
+      ids = searchGoogleImages($1)
+      ids.each { |id|
+        @candidates << id
       }
     elsif q == "ds" then # TimeStamp or DateStamp(?)
       @candidates << Time.now.strftime('%Y/%m/%d %H:%M:%S')
@@ -127,6 +240,7 @@ class WordSearch
     if !@localdict.index([yomi,word]) then
       @localdict.unshift([yomi,word])
       saveDict(localDictFile,@localdict)
+      @localdicttime = File.mtime(localDictFile)
     end
   end
 
@@ -165,7 +279,7 @@ class WordSearch
           next if line =~ /^#/
           next if line =~ /^\s*$/
           line.chomp!
-          (yomi,word) = line.split(/\s+/)
+          (yomi,word) = line.split(/\t/)
           if yomi && word then
             dict << [yomi, word]
           end
