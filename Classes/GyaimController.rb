@@ -277,6 +277,11 @@ class GyaimController < IMKInputController
         @tmp_image_displayed = false
       else
         @client.insertText(word,replacementRange:NSMakeRange(NSNotFound, NSNotFound))
+        if @inputPat !~ /^(.*)\?$/ then # 暗号化単語じゃない
+          File.open(File.expand_path("~/.gyaimdict/log/#{Time.now.strftime('%Y%m%d')}.txt"),"a"){ |f|
+            f.puts "#{Time.now.strftime('%Y%m%d%H%M%S')}\t#{word}"
+          }
+        end
       end
 
       if word == @selectedstr then

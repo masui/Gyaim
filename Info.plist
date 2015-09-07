@@ -20,12 +20,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-	<key>LSBackgroundOnly</key>
-	<true/>
 	<key>ComponentInputModeDict</key>
 	<dict>
 		<key>tsInputModeListKey</key>
@@ -47,17 +41,25 @@
 			<string>com.apple.inputmethod.Japanese</string>
 		</array>
 	</dict>
-	<key>tsInputMethodCharacterRepertoireKey</key>
-	<array>
-		<string>Hira</string>
-		<string>Latn</string>
-	</array>
 	<key>InputMethodConnectionName</key>
 	<string>Gyaim_Connection</string>
 	<key>InputMethodServerControllerClass</key>
 	<string>GyaimController</string>
 	<key>InputMethodServerDelegateClass</key>
 	<string>GyaimController</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
+	<key>LSBackgroundOnly</key>
+	<true/>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>tsInputMethodCharacterRepertoireKey</key>
+	<array>
+		<string>Hira</string>
+		<string>Latn</string>
+	</array>
 	<key>tsInputMethodIconFileKey</key>
 	<string>icon.tiff</string>
 </dict>

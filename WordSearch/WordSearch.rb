@@ -198,6 +198,9 @@ class WordSearch
           end
         end
       }
+    elsif q =~ /[A-Z]/ then
+      # 読みが大文字を含む場合は候補に入れる
+      @candidates << [q, q]
     else
       # 普通に検索
       qq = q.gsub(/[\.\{\}\[\]\(\)]/){ '\\' + $& }
