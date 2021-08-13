@@ -1,11 +1,11 @@
 # Gyaim
 
- * [MacRuby](http://www.macruby.org/)で作ったMac用のIMEです。
- * 数百行のRubyで実用レベルのIMEを作れることを示すものです
-    * 単純な変換しかできませんがそれなりに使えます
-    * 見栄えはInterfaceBuilderで簡単に変更できます
-    * 変換アルゴリズムやIMEの動作はRubyで簡単に変更できます
-    * 自前のIMEをいろいろ作りましょう!
+* [MacRuby](http://www.macruby.org/)で作ったMac用のIMEです。
+* 数百行のRubyで実用レベルのIMEを作れることを示すものです
+  * 単純な変換しかできませんがそれなりに使えます
+  * 見栄えはInterfaceBuilderで簡単に変更できます
+  * 変換アルゴリズムやIMEの動作はRubyで簡単に変更できます
+  * 自前のIMEをいろいろ作りましょう!
  * 変換手法はSlimeと同じです
  * 予測機能はありません
 
